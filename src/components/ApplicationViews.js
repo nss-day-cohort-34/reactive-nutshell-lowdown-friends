@@ -52,15 +52,18 @@ export default class ApplicationViews extends Component {
             return null
             // Remove null and return the component which will show the user's tasks
           }}
-        /> */}
+        />
         <Route
           path="/events" render={props => {
-            return <EventsSection />
+            return this.isAuthenticated()
+              ? <EventsSection {...props} />
+              : <Redirect to="/welcome" />
           }}
+        />
         <Route exact path="/tasks" render={props => {
           return this.isAuthenticated()
-          ? <TaskList {...props} />
-          : <Redirect to="/welcome" />
+            ? <TaskList {...props} />
+            : <Redirect to="/welcome" />
         }}
         />
 
