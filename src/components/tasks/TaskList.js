@@ -7,11 +7,12 @@ class TaskList extends Component {
         tasks: [],
     }
 
+    activeUserId = sessionStorage.getItem("activeUser")
+
     componentDidMount() {
-        console.log("TASK LIST: ComponentDidMount");
         //getAll from TaskManager and hang on to that data; put it in state
-        const activeUserId = sessionStorage.getItem("activeUser")
-        TaskManager.getAllTasks(activeUserId)
+        // const activeUserId = sessionStorage.getItem("activeUser")
+        TaskManager.getAllTasks(this.activeUserId)
             .then((tasks) => {
                 this.setState({
                     tasks: tasks
@@ -22,8 +23,8 @@ class TaskList extends Component {
     deleteTask = id => {
         TaskManager.deleteTaskFromDatabase(id)
             .then(() => {
-                const activeUserId = sessionStorage.getItem("activeUser")
-                TaskManager.getAllTasks(activeUserId)
+                // const activeUserId = sessionStorage.getItem("activeUser")
+                TaskManager.getAllTasks(this.activeUserId)
                     .then((newTasks) => {
                         this.setState({
                             tasks: newTasks
@@ -33,16 +34,14 @@ class TaskList extends Component {
     }
 
     render() {
-        console.log("TASK LIST: Render");
-
         return (
             <>
-                {/* <section className="section-content">
+                <h1>Tasks</h1>
+                <section className="section-content">
                     <button type="button"
-                        className="btn"
                         onClick={() => { this.props.history.push("/tasks/new") }}>
-                        Admit Task</button>
-                </section> */}
+                        Create Task</button>
+                </section>
                 <div className="task__list">
                     {this.state.tasks.map(task =>
                         <TaskCard

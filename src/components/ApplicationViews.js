@@ -4,6 +4,7 @@ import WelcomePage from "./welcome/WelcomePage";
 import RegistrationForm from "./auth/Register"
 import LoginForm from "./auth/Login";
 import TaskList from "./tasks/TaskList"
+import TaskAddForm from "./tasks/TaskAddForm";
 
 export default class ApplicationViews extends Component {
 
@@ -41,12 +42,15 @@ export default class ApplicationViews extends Component {
           }}
         /> */}
 
-        <Route
-          path="/tasks" render={props => {
+        <Route exact path="/tasks" render={props => {
             return <TaskList {...props} />
           }}
         />
 
+        <Route path="/tasks/new" render={props => {
+            return <TaskAddForm {...props} />
+          }}
+        />
       </React.Fragment>
     );
   }
