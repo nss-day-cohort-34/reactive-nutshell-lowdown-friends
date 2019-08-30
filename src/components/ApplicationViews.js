@@ -5,6 +5,9 @@ import RegistrationForm from "./auth/Register"
 import LoginForm from "./auth/Login";
 import EventsSection from "./events/EventsSection"
 
+import Messages from "./messages/MessageSection"
+import TaskList from "./tasks/TaskList"
+import TaskAddForm from "./tasks/TaskAddForm";
 
 export default class ApplicationViews extends Component {
 
@@ -34,12 +37,13 @@ export default class ApplicationViews extends Component {
             return null
             // Remove null and return the component which will show list of friends
           }}
-        />
+        /> */}
 
         <Route
           path="/messages" render={props => {
-            return null
-            // Remove null and return the component which will show the messages
+            return this.isAuthenticated()
+              ? <Messages />
+              : <Redirect to="/welcome" />
           }}
         />
 
@@ -53,6 +57,16 @@ export default class ApplicationViews extends Component {
           path="/events" render={props => {
             return <EventsSection />
           }}
+        <Route exact path="/tasks" render={props => {
+          return this.isAuthenticated()
+          ? <TaskList {...props} />
+          : <Redirect to="/welcome" />
+        }}
+        />
+
+        <Route path="/tasks/new" render={props => {
+          return <TaskAddForm {...props} />
+        }}
         />
       </React.Fragment>
     );
