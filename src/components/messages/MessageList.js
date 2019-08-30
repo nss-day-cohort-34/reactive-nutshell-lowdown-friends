@@ -10,7 +10,6 @@ class MessageList extends Component {
   componentDidMount() {
     MessageManager.getAllMessages()
       .then((messagesArr) => {
-        console.log(messagesArr)
         this.setState({
           messages: messagesArr
         })
