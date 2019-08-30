@@ -2,6 +2,7 @@ import { Route, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 import WelcomePage from "./welcome/WelcomePage";
 import RegistrationForm from "./auth/Register"
+import LoginForm from "./auth/Login";
 
 export default class ApplicationViews extends Component {
 
@@ -22,6 +23,9 @@ export default class ApplicationViews extends Component {
 
         {/* Render registration form */}
         <Route path="/register" component={RegistrationForm} />
+
+        {/* Render login form */}
+        <Route path="/login" component={LoginForm} />
 {/*
         <Route
           path="/friends" render={props => {
