@@ -3,6 +3,7 @@ import NavBar from "./nav/NavBar";
 import ApplicationViews from "./ApplicationViews";
 import "./Nutshell.css";
 
+
 class Nutshell extends Component {
   render() {
     return (
