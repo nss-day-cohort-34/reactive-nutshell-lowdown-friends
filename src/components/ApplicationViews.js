@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import WelcomePage from "./welcome/WelcomePage";
 import RegistrationForm from "./auth/Register"
 import LoginForm from "./auth/Login";
+import TaskList from "./tasks/TaskList"
 
 export default class ApplicationViews extends Component {
 
@@ -26,27 +27,25 @@ export default class ApplicationViews extends Component {
 
         {/* Render login form */}
         <Route path="/login" component={LoginForm} />
-{/*
-        <Route
+        {/* <Route
           path="/friends" render={props => {
             return null
             // Remove null and return the component which will show list of friends
           }}
-        />
+        /> */}
 
-        <Route
+        {/* <Route
           path="/messages" render={props => {
             return null
             // Remove null and return the component which will show the messages
           }}
-        />
+        /> */}
 
         <Route
           path="/tasks" render={props => {
-            return null
-            // Remove null and return the component which will show the user's tasks
+            return <TaskList {...props} />
           }}
-        /> */}
+        />
 
       </React.Fragment>
     );
