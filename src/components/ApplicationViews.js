@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import WelcomePage from "./welcome/WelcomePage";
 import RegistrationForm from "./auth/Register"
 import LoginForm from "./auth/Login";
+import EventsSection from "./events/EventsSection"
+
 
 export default class ApplicationViews extends Component {
 
@@ -26,7 +28,7 @@ export default class ApplicationViews extends Component {
 
         {/* Render login form */}
         <Route path="/login" component={LoginForm} />
-{/*
+        {/*
         <Route
           path="/friends" render={props => {
             return null
@@ -47,7 +49,11 @@ export default class ApplicationViews extends Component {
             // Remove null and return the component which will show the user's tasks
           }}
         /> */}
-
+        <Route
+          path="/events" render={props => {
+            return <EventsSection />
+          }}
+        />
       </React.Fragment>
     );
   }
