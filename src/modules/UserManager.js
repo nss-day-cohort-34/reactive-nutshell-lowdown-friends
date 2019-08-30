@@ -1,12 +1,12 @@
 const remoteURL = "http://localhost:5002"
 
 const UserData = {
-  get(id) {
+  getSingleUser(id) {
     return fetch(`${remoteURL}/users/${id}`)
       .then(result => result.json())
-    },
-    get(userObjProperty, string) {
-      return fetch(`${remoteURL}/users?${userObjProperty}=${string}`)
+  },
+  getUserFromSearch(userObjProperty, string) {
+    return fetch(`${remoteURL}/users?${userObjProperty}=${string}`)
       .then(result => result.json())
   },
   getAll() {
@@ -21,7 +21,7 @@ const UserData = {
       },
       body: JSON.stringify(user)
     })
-    .then(result => result.json())
+      .then(result => result.json())
   }
 }
 

@@ -17,7 +17,7 @@ class RegistrationForm extends Component {
 
   // Validate that email does not exist in database. If unique, call function to check that username is unique
   checkEmailIsUnique = (userObj) => {
-    UserData.get("email", userObj.email)
+    UserData.getUserFromSearch("email", userObj.email)
     .then((usersArr) => {
       const emailIsNotUnique = usersArr.length > 0
       if (emailIsNotUnique) {
@@ -30,7 +30,7 @@ class RegistrationForm extends Component {
 
   // Validate that username does not exist in database. If unique, call function to save new user to database and redirect to "home" page
   checkUsernameIsUnique = (userObj) => {
-    UserData.get("username", userObj.username)
+    UserData.getUserFromSearch("username", userObj.username)
       .then((usersArr) => {
         const usernameIsNotUnique = usersArr.length > 0
         if (usernameIsNotUnique) {

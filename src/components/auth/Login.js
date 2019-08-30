@@ -19,14 +19,21 @@ class LoginForm extends Component {
       email: this.state.email,
       password: this.state.password
     }
-    UserData.get("email", userObj.email)
+    UserData.getUserFromSearch("email", userObj.email)
       .then((userArr) => {
         const userIsInDatabase = userArr.length > 0
-        const existingUserObj = userArr[0]
-        const passwordMatches = existingUserObj.password === userObj.password
-        if (userIsInDatabase && passwordMatches) {
-          sessionStorage.setItem("activeUser", existingUserObj.id)
-          this.props.history.push("/")
+        if (userIsInDatabase) {
+          const existingUserObj = userArr[0]
+          const passwordMatches = existingUserObj.password === userObj.password
+          if (passwordMatches) {
+            sessionStorage.setItem("activeUser", existingUserObj.id)
+            this.props.history.push("/")
+          }
+        } else {
+          const userConfirmation = window.confirm("Username/password not found. Click \"Okay\" to register as new user. Click \"Cancel\" to try again.")
+          if (userConfirmation) {
+            this.props.history.push("/register")
+          }
         }
       })
   }

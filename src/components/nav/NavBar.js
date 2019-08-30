@@ -1,12 +1,12 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 
 class NavBar extends Component {
     logOut = (event) => {
         sessionStorage.removeItem("activeUser")
-        this.props.history.push("/")
+        this.props.history.push("/welcome")
       }
 
     render() {
@@ -32,4 +32,5 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar
+// Export using withRouter to be able to use {...props} in log out function
+export default withRouter(NavBar)
