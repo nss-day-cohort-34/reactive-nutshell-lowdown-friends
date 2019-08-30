@@ -30,7 +30,7 @@ class LoginForm extends Component {
             this.props.history.push("/")
           }
         } else {
-          const userConfirmation = window.confirm("Username/password not found. Click \"Okay\" to register as new user. Click \"Cancel\" to try again.")
+          const userConfirmation = window.confirm("Username/password not found. Click \"OK\" to register as new user. Click \"Cancel\" to try again.")
           if (userConfirmation) {
             this.props.history.push("/register")
           }

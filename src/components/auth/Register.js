@@ -21,7 +21,10 @@ class RegistrationForm extends Component {
     .then((usersArr) => {
       const emailIsNotUnique = usersArr.length > 0
       if (emailIsNotUnique) {
-        alert("Email already exists. Use a different email or log in.")
+        const userConfirmation = window.confirm("Email already exists. Click \"OK\" to log in as existing user. Click \"Cancel\" to enter a different email.")
+        if (userConfirmation) {
+          this.props.history.push("/login")
+        }
       } else {
         this.checkUsernameIsUnique(userObj)
       }
