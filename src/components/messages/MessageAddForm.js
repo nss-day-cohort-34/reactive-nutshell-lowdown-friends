@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import MessageManager from '../../modules/MessageManager';
-import { networkInterfaces } from 'os';
 // import './MessageForm.css'
 
 class AddMessageForm extends Component {
@@ -27,9 +27,14 @@ class AddMessageForm extends Component {
         date: date
       };
 
-      // Create the animal and redirect user to animal list
       MessageManager.addNewMessageToDatabase(messageObj)
-        .then(() => this.props.history.push("/messages"));
+        .then(() => {
+          this.setState({
+            message: "",
+            loadingStatus: false,
+          })
+          this.props.history.push("/messages")
+        });
     }
   };
 
@@ -38,23 +43,22 @@ class AddMessageForm extends Component {
     return (
       <>
         <form>
-          <fieldset>
-            <div className="formgrid">
+            <div className="addMessageForm">
               <input
-                type="text" required onChange={this.handleFieldChange} id="message"
+                type="text" required onChange={this.handleChange} id="message"
                 placeholder="Your message here"
+                value={this.state.message}
               />
               <button
                 type="button"
                 disabled={this.state.loadingStatus}
-                onClick={this.constructNewAnimal}
+                onClick={this.createNewMessage}
               >Submit</button>
             </div>
-          </fieldset>
         </form>
       </>
     )
   }
 }
 
-export default AddMessageForm
+export default withRouter(AddMessageForm)
