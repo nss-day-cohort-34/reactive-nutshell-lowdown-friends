@@ -6,10 +6,14 @@ export default class EventsList extends Component {
         console.log(this.props.state.events)
         return (
             <>
-                <h2>EventsList</h2>
-                {this.props.state.events.map(event => {
-                    return <EventCard key={event.id} event={event} />
-                })}
+                <div className="container">
+                    <h2 className="text-center my-5">EventsList</h2>
+                    <div className="row">
+                        {this.props.state.events.map(event => {
+                            return <EventCard key={event.id} event={event} />
+                        })}
+                    </div>
+                </div>
             </>
         )
     }
