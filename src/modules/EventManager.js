@@ -10,7 +10,7 @@ export default {
             .then(result => result.json())
     },
     getAll() {
-        return fetch(`${remoteURL}/events`)
+        return fetch(`${remoteURL}/events?_sort=date&_order=desc`)
             .then(result => result.json())
     },
     addEvent(event) {
@@ -22,6 +22,12 @@ export default {
             body: JSON.stringify(event)
         })
             .then(result => result.json())
+    },
+    deleteEvent(eventId) {
+        return fetch(`${remoteURL}/events/${eventId}`, {
+            method: "DELETE"
+        })
+        .then(result => result.json())
     }
 
 }

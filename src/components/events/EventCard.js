@@ -10,7 +10,7 @@ export default class EventCard extends Component {
                 <p className="eventDate__p">Date: <span>{this.props.event.date}</span></p>
                 <p className="eventLocation__p">Location: <span>{this.props.event.location}</span></p>
                 <button className="edit__button btn btn-info">Edit</button>
-                <button className="delete__button btn btn-danger mx-3">Delete</button>
+                <button className="delete__button btn btn-danger mx-3" onClick={() => this.props.deleteEvent(this.props.event.id)}>Delete</button>
             </div>
         )
     }
