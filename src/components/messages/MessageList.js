@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MessageCard from './MessageCard'
+import './MessageList.css'
 
 class MessageList extends Component {
 

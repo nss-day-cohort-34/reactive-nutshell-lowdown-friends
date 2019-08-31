@@ -10,7 +10,7 @@ const MessageData = {
       .then(result => result.json())
   },
   getAllMessages() {
-    return fetch(`${remoteURL}/messages?_expand=user`)
+    return fetch(`${remoteURL}/messages?_expand=user&_sort=date&_order=desc`)
       .then(result => result.json())
   },
   addNewMessageToDatabase(messageObj) {

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-// import './MessageForm.css'
 
 class AddMessageForm extends Component {
   render() {
@@ -26,4 +24,4 @@ class AddMessageForm extends Component {
   }
 }
 
-export default withRouter(AddMessageForm)
+export default AddMessageForm

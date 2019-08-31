@@ -3,12 +3,14 @@ import MessageHeader from './MessageHeader'
 import MessageList from './MessageList'
 import AddMessageForm from './MessageAddForm'
 import MessageManager from '../../modules/MessageManager'
+import MessageData from '../../modules/MessageManager';
 
 class Messages extends Component {
   state = {
     message: "",
     loadingStatus: false,
     messages: [],
+    messageEdit: ""
   }
 
   componentDidMount() {
@@ -48,6 +50,23 @@ class Messages extends Component {
           this.getMessagesAndSetState()
         })
     }
+  }
+
+  saveEditedMessage = event => {
+    event.preventDefault();
+    MessageData.getSingleMessage()
+    this.setState({ loadingStatus: true })
+    const userId = parseInt(sessionStorage.getItem("activeUser"))
+    const date = new Date()
+    const messageObj = {
+      userId: userId,
+      message: this.state.message,
+      date: date
+    }
+    MessageManager.addNewMessageToDatabase(messageObj)
+      .then(() => {
+        this.getMessagesAndSetState()
+      })
   }
 
   render() {
