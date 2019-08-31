@@ -19,8 +19,8 @@ export default class EventsSection extends Component {
     render() {
         return (
             <section className="events__section">
-                <EventsHeader state={this.state} />
-                <EventsList state={this.state} />
+                <EventsHeader state={this.state} {...this.props} />
+                <EventsList state={this.state} {...this.props} />
             </section>
         )
     }

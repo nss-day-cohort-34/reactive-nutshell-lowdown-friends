@@ -3,7 +3,6 @@ import EventCard from './EventCard'
 
 export default class EventsList extends Component {
     render() {
-        console.log(this.props.state.events)
         return (
             <>
                 <div className="container">

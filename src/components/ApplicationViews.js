@@ -4,6 +4,7 @@ import WelcomePage from "./welcome/WelcomePage";
 import RegistrationForm from "./auth/Register"
 import LoginForm from "./auth/Login";
 import EventsSection from "./events/EventsSection"
+import EventsForm from './events/EventsForm';
 
 import Messages from "./messages/MessageSection"
 import TaskList from "./tasks/TaskList"
@@ -53,13 +54,20 @@ export default class ApplicationViews extends Component {
             // Remove null and return the component which will show the user's tasks
           }}
         />
-        <Route
-          path="/events" render={props => {
+
+        <Route exact path="/events" render={props => {
             return this.isAuthenticated()
               ? <EventsSection {...props} />
               : <Redirect to="/welcome" />
           }}
         />
+        
+        <Route path="/events/new" render={(props) => {
+          return this.isAuthenticated()
+          ? <EventsForm {...props} />
+          : <Redirect to="/welcome" />
+        }} />
+
         <Route exact path="/tasks" render={props => {
           return this.isAuthenticated()
             ? <TaskList {...props} />

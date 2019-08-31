@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 
 export default class EventCard extends Component {
     render() {
-        console.log(this.props)
         return (
             <div className="eventCard__div col-sm-4 my-4">
                 <h4 className="eventName__h3">Name: <span>{this.props.event.name}</span></h4>

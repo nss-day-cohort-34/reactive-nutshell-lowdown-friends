@@ -13,7 +13,7 @@ export default {
         return fetch(`${remoteURL}/events`)
             .then(result => result.json())
     },
-    post(event) {
+    addEvent(event) {
         return fetch(`${remoteURL}/events/`, {
             method: "POST",
             headers: {
