@@ -7,14 +7,19 @@ class MessageList extends Component {
   render() {
 
     return (
-      <div className="message__list">
-        {this.props.messages.map(message =>
-          <MessageCard
-            key={message.id}
-            message={message}
-          />
-        )}
-      </div>
+      <>
+        {this.props.messages.length === 0
+          ? <h2>Start a Conversation!</h2>
+          : <></>}
+        <div className="message__list">
+          {this.props.messages.map(message =>
+            <MessageCard
+              key={message.id}
+              message={message}
+            />
+          )}
+        </div>
+      </>
     )
   }
 }

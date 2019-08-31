@@ -4,6 +4,7 @@ import MessageList from './MessageList'
 import AddMessageForm from './MessageAddForm'
 import MessageManager from '../../modules/MessageManager'
 import MessageData from '../../modules/MessageManager';
+import './Message.css'
 
 class Messages extends Component {
   state = {

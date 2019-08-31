@@ -1,0 +1,13 @@
+.addMessage__form {
+  display: flex;
+}
+
+.addMessage__input {
+  flex-grow: 1;
+  padding: .5em;
+}
+
+.addMessage__button {
+  width: 6em;
+  height: 3em;
+}

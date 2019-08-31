@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './Message.css'
+import './MessageCard.css'
 
 class MessageCard extends Component {
   activeUser = parseInt(sessionStorage.getItem("activeUser"))
@@ -7,7 +7,12 @@ class MessageCard extends Component {
 
   render() {
     return (
-      <div className="message__card">
+      <div className={this.activeUser === this.userIdInMessage
+      ?
+      "activeUserMessage__card message__card"
+    : "nonActiveUserMessage__card message__card"}
+    // className="message__card"
+    >
         <h3>{this.props.message.user.username}</h3>
         <p>{this.props.message.message}</p>
         {/* Ternary expression determines whether edit button will render based on userId */}
