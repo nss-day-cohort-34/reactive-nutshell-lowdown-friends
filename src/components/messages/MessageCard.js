@@ -62,7 +62,8 @@ class MessageCard extends Component {
       <p>{messageText}</p>
       {
         // Ternary expression determines whether edit button will render based on userId
-        this.activeUser === this.userIdInMessageObj ?
+        this.activeUser === this.userIdInMessageObj
+          ?
           <button
             type="button"
             disabled={this.state.editing}

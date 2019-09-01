@@ -8,7 +8,9 @@ class AddMessageForm extends Component {
         <form>
           <div className="addMessage__form">
             <input
-              type="text" required onChange={this.props.handleAddChange} id="message"
+              type="text"
+              onChange={this.props.handleAddChange}
+              id="message"
               placeholder="Your message here"
               value={this.props.message}
               className="addMessage__input"
