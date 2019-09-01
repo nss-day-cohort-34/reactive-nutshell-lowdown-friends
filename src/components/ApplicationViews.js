@@ -5,6 +5,7 @@ import RegistrationForm from "./auth/Register"
 import LoginForm from "./auth/Login";
 import EventsSection from "./events/EventsSection"
 import EventsForm from './events/EventsForm';
+import EventEditForm from './events/EventsEditForm';
 
 import Messages from "./messages/MessageSection"
 import TaskList from "./tasks/TaskList"
@@ -55,18 +56,27 @@ export default class ApplicationViews extends Component {
           }}
         />
 
+        {/* EVENTS ROUTES START */}
         <Route exact path="/events" render={props => {
-            return this.isAuthenticated()
-              ? <EventsSection {...props} />
-              : <Redirect to="/welcome" />
-          }}
+          return this.isAuthenticated()
+            ? <EventsSection {...props} />
+            : <Redirect to="/welcome" />
+        }}
         />
-        
+
         <Route path="/events/new" render={(props) => {
           return this.isAuthenticated()
-          ? <EventsForm {...props} />
-          : <Redirect to="/welcome" />
+            ? <EventsForm {...props} />
+            : <Redirect to="/welcome" />
         }} />
+
+        <Route path="/events/:eventId(\d+)/edit" render={props => {
+          return this.isAuthenticated()
+          ? <EventEditForm {...props} />
+          : <Redirect to="/welcome" />
+        }}
+        />
+        {/* EVENTS ROUTES END */}
 
         <Route exact path="/tasks" render={props => {
           return this.isAuthenticated()
