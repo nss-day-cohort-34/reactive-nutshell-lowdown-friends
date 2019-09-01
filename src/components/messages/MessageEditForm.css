@@ -1,0 +1,13 @@
+.addMessage__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.editMessage__input {
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.saveMessageChanges__btn {
+  width: 8em;
+}

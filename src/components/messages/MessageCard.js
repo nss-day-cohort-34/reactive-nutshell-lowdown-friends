@@ -68,6 +68,7 @@ class MessageCard extends Component {
             disabled={this.state.editing}
             onClick={this.handleEditButton}
             id={"edit-message-btn--" + this.props.messageObj.id}
+            className="editMessage__btn"
           >Edit Message</button>
           :
           null
