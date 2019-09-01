@@ -3,7 +3,7 @@ import MessageHeader from './MessageHeader'
 import MessageList from './MessageList'
 import AddMessageForm from './MessageAddForm'
 import MessageManager from '../../modules/MessageManager'
-import './Message.css'
+import './MessageSection.css'
 
 class Messages extends Component {
   state = {

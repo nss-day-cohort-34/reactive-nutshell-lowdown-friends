@@ -8,7 +8,7 @@ class EditMessageForm extends Component {
     return (
       <>
         <form>
-            <div className="addMessage__form">
+            <div className="editMessage__form">
               <input
                 type="text" required onChange={this.props.handleEditChange}
                 id="message"
