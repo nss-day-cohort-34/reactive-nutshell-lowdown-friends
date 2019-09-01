@@ -8,13 +8,13 @@ class EditMessageForm extends Component {
         <form>
             <div className="addMessageForm">
               <input
-                type="text" required onChange={this.props.handleChange} id="messageEdit"
-                value={this.props.messageEdit}
+                type="text" required onChange={this.props.handleEditChange} id="message"
+                value={this.props.editMessageObj.message}
               />
               <button
                 type="button"
-                disabled={this.props.loadingStatus}
-                onClick={this.props.saveEditedMessage}
+                disabled={!this.props.editMessageObj.editing}
+                onClick={this.props.handleSaveChangesButton}
               >Save Changes</button>
             </div>
         </form>

@@ -12,4 +12,5 @@ align-self: flex-start;
   padding: 1em;
   margin: 1em;
   min-width: 55%;
+  max-width: 75%;
 }

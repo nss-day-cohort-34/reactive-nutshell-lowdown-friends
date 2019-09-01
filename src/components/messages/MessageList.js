@@ -3,7 +3,6 @@ import MessageCard from './MessageCard'
 import './MessageList.css'
 
 class MessageList extends Component {
-
   render() {
 
     return (
@@ -16,6 +15,7 @@ class MessageList extends Component {
             <MessageCard
               key={message.id}
               message={message}
+              updateSingleCard={this.props.updateSingleCard}
             />
           )}
         </div>
