@@ -13,9 +13,11 @@ class MessageCard extends Component {
     id: 0
   }
 
+  // Store id for active user and user id from props in variables
   activeUser = parseInt(sessionStorage.getItem("activeUser"))
-  userIdInMessageObj = this.props.message.userId
+  userIdInMessageObj = this.props.messageObj.userId
 
+  // Handle edit button for a single message
   handleEditButton = (event) => {
     const idNum = event.target.id.split("--")[1]
     MessageManager.getSingleMessage(idNum)
@@ -30,10 +32,13 @@ class MessageCard extends Component {
       })
   }
 
+  // Handle change to input field in the edit form and set state based on user input
   handleEditChange = (event) => {
     this.setState({ [event.target.id]: event.target.value })
   }
 
+  // Handle button for saving edit changes - create new object based on state and save it to the database
+  // Call function 'updateSingleCard' to trigger re-render
   handleSaveChangesButton = event => {
     event.preventDefault();
     const editedMessageObj = {
@@ -51,6 +56,7 @@ class MessageCard extends Component {
 
   }
 
+  // JSX for the message text and 'edit message' button. Receives the message text as an argument.
   returnMessageAndEditBtnRep = (messageText) => {
     return <>
       <p>{messageText}</p>
@@ -61,7 +67,7 @@ class MessageCard extends Component {
             type="button"
             disabled={this.state.editing}
             onClick={this.handleEditButton}
-            id={"edit-message-btn--" + this.props.message.id}
+            id={"edit-message-btn--" + this.props.messageObj.id}
           >Edit Message</button>
           :
           null
@@ -69,6 +75,7 @@ class MessageCard extends Component {
     </>
   }
 
+  // Render an individual message card, based on conditions described below
   render() {
     return (
       <div className={
@@ -79,13 +86,13 @@ class MessageCard extends Component {
           :
           "nonActiveUserMessage__card message__card"
       }>
-        <h3>{this.props.message.user.username}</h3>
+        <h3>{this.props.messageObj.user.username}</h3>
         <>
           {
-            // Ternary expression determines whether message or edit form will render
+            // Ternary expression determines whether message text or edit form will render
             this.state.editing === false
               ?
-              this.returnMessageAndEditBtnRep(this.props.message.message)
+              this.returnMessageAndEditBtnRep(this.props.messageObj.message)
               :
               <EditMessageForm
                 handleEditChange={this.handleEditChange}

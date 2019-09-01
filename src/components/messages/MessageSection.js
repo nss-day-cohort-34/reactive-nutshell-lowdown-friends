@@ -18,22 +18,25 @@ class Messages extends Component {
     this.getMessagesAndSetState()
   }
 
+  // Get messages array from database and set 'messages' in state equal to the returned messages array, triggering render function
   getMessagesAndSetState = () => {
     MessageManager.getAllMessages()
-    .then((messagesArr) => {
-      this.setState({
-        message: "",
-        loadingStatus: false,
-        messages: messagesArr
+      .then((messagesArr) => {
+        this.setState({
+          message: "",
+          loadingStatus: false,
+          messages: messagesArr
+        })
       })
-    })
   }
 
+  // Handler for add new message form inputs
   handleAddChange = (event) => {
     this.setState({ [event.target.id]: event.target.value })
   }
 
-  createNewMessage = event => {
+  // Handler for button to post new message
+  handlePostNewMessageButton = event => {
     event.preventDefault();
     if (this.state.message === "") {
       window.alert("Please type a message before submitting.")
@@ -47,35 +50,36 @@ class Messages extends Component {
         date: date
       }
       MessageManager.addNewMessageToDatabase(messageObj)
-      .then(() => {
-        this.getMessagesAndSetState()
-      })
+        .then(() => {
+          this.getMessagesAndSetState()
+        })
     }
   }
 
-  updateSingleCard = (messageObj) => {
+  // Function for editing process - updates the messages array in state with the edited message text and triggers re-render of cards
+  updateSingleCard = (editedMessageObj) => {
     const messages = this.state.messages
     this.state.messages.forEach(msg => {
-      if (msg.id === messageObj.id) {
-        msg.message = messageObj.message
+      if (msg.id === editedMessageObj.id) {
+        msg.message = editedMessageObj.message
       }
     })
-    this.setState({messages: messages})
+    this.setState({ messages: messages })
   }
 
+  // Render message header, message list, and add message form
   render() {
-
     return (
       <div className="message__section">
         <MessageHeader />
         <MessageList
-        messages={this.state.messages}
-        updateSingleCard={this.updateSingleCard}
+          messages={this.state.messages}
+          updateSingleCard={this.updateSingleCard}
         />
         <AddMessageForm
           message={this.state.message}
           handleAddChange={this.handleAddChange}
-          createNewMessage={this.createNewMessage} />
+          handlePostNewMessageButton={this.handlePostNewMessageButton} />
       </div>
     )
   }

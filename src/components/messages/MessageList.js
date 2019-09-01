@@ -4,7 +4,6 @@ import './MessageList.css'
 
 class MessageList extends Component {
   render() {
-
     return (
       <>
         {this.props.messages.length === 0
@@ -14,7 +13,7 @@ class MessageList extends Component {
           {this.props.messages.map(message =>
             <MessageCard
               key={message.id}
-              message={message}
+              messageObj={message}
               updateSingleCard={this.props.updateSingleCard}
             />
           )}
