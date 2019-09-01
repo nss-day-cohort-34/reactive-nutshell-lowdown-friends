@@ -5,12 +5,11 @@ class TaskHeader extends Component {
 
     render() {
         return (
-            <div className="card">
-                <div className="card-content">
+            <header className="task__header">
                     <h1>Tasks</h1>
-                    <button type="button" onClick={() => this.props.history.push("/tasks/new")}>Create Task</button>
-                </div>
-            </div>
+                    <button type="button" onClick={() =>
+                        this.props.history.push("/tasks/new")}>Add Task</button>
+            </header>
         );
     }
 }

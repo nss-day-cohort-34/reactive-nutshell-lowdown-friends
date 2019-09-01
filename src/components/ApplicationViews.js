@@ -4,7 +4,7 @@ import WelcomePage from "./welcome/WelcomePage";
 import RegistrationForm from "./auth/Register"
 import LoginForm from "./auth/Login";
 import Messages from "./messages/MessageSection"
-import TaskList from "./tasks/TaskList"
+import TaskSection from "./tasks/TaskSection";
 import TaskAddForm from "./tasks/TaskAddForm";
 
 export default class ApplicationViews extends Component {
@@ -46,13 +46,15 @@ export default class ApplicationViews extends Component {
 
         <Route exact path="/tasks" render={props => {
           return this.isAuthenticated()
-          ? <TaskList {...props} />
-          : <Redirect to="/welcome" />
+            ? <TaskSection {...props} />
+            : <Redirect to="/welcome" />
         }}
         />
 
         <Route path="/tasks/new" render={props => {
-          return <TaskAddForm {...props} />
+          return this.isAuthenticated()
+            ? <TaskAddForm {...props} />
+            : <Redirect to="/welcome" />
         }}
         />
       </React.Fragment>

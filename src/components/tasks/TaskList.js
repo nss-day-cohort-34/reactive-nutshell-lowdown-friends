@@ -36,12 +36,6 @@ class TaskList extends Component {
     render() {
         return (
             <>
-                <h1>Tasks</h1>
-                <section className="section-content">
-                    <button type="button"
-                        onClick={() => { this.props.history.push("/tasks/new") }}>
-                        Create Task</button>
-                </section>
                 <div className="task__list">
                     {this.state.tasks.map(task =>
                         <TaskCard
