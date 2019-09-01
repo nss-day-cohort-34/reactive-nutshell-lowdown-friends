@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import TaskCard from './TaskCard';
+import TaskCompleted from './TaskCompleted';
 import TaskManager from '../../modules/TaskManager';
 
 class TaskList extends Component {
     state = {
         tasks: [],
+        isHidden: true,
     }
 
     activeUserId = sessionStorage.getItem("activeUser")
 
     componentDidMount() {
-        //getAll from TaskManager and hang on to that data; put it in state
-        // const activeUserId = sessionStorage.getItem("activeUser")
         TaskManager.getAllTasks(this.activeUserId)
             .then((tasks) => {
                 this.setState({
@@ -19,32 +19,54 @@ class TaskList extends Component {
                 })
             })
     }
-    // Wherever the state is that's holding a list of items is where you need to define actions that affect state, which is why deleteTask() is defined here instead of on TaskCard
+
     deleteTask = id => {
         TaskManager.deleteTaskFromDatabase(id)
             .then(() => {
-                // const activeUserId = sessionStorage.getItem("activeUser")
-                TaskManager.getAllTasks(this.activeUserId)
-                    .then((newTasks) => {
-                        this.setState({
-                            tasks: newTasks
-                        })
-                    })
+                this.componentDidMount()
             })
+    }
+
+    updateTask = taskObj => {
+        TaskManager.saveEditedTaskToDatabase(taskObj)
+            .then(() => {
+                this.componentDidMount()
+            })
+    }
+
+    toggleHidden() {
+        this.setState({
+            isHidden: !this.state.isHidden
+        })
     }
 
     render() {
         return (
             <>
+            <button onClick={this.toggleHidden.bind(this)}>Show/Hide Completed Tasks</button>
                 <div className="task__list">
-                    {this.state.tasks.map(task =>
-                        <TaskCard
-                            key={task.id}
-                            task={task}
-                            deleteTask={this.deleteTask}
-                            {...this.props}
-                        />
-                    )}
+                    {this.state.tasks.filter(task => task.isCompleted === false)
+                        .map(task =>
+                            <TaskCard
+                                key={task.id}
+                                task={task}
+                                deleteTask={this.deleteTask}
+                                updateTask={this.updateTask}
+                                {...this.props}
+                            />
+                        )}
+                </div>
+                <div className="task__completed">
+                    {this.state.tasks.filter(task => task.isCompleted === true && !this.state.isHidden)
+                        .map(task =>
+                            <TaskCompleted
+                                key={task.id}
+                                task={task}
+                                deleteTask={this.deleteTask}
+                                updateTask={this.updateTask}
+                                {...this.props}
+                            />
+                        )}
                 </div>
             </>
         )
