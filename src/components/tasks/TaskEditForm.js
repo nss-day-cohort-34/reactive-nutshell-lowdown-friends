@@ -46,6 +46,12 @@ export default class TaskEditForm extends Component {
             })
         }
 
+handleKeyPress = event => {
+    if (event.key === "Enter") {
+        this.updateExistingTask(event)
+    }
+}
+
     render() {
 
         return (
@@ -56,6 +62,7 @@ export default class TaskEditForm extends Component {
                             <label htmlFor="editName">Name</label>
                             <input type="text" required
                                 onChange={this.handleFieldChange}
+                                onKeyPress={this.handleKeyPress}
                                 id="editName"
                                 value={this.state.editName}
                             />
@@ -68,13 +75,13 @@ export default class TaskEditForm extends Component {
                                 value={this.state.date}
                             /> */}
                         </div>
-                        <div className="alignRight">
+                        {/* <div className="alignRight">
                             <button
                                 type="button"
                                 disabled={this.state.loadingStatus}
                                 onClick={this.updateExistingTask}
                             >Submit</button>
-                        </div>
+                        </div> */}
                     </fieldset>
                 </form>
             </>
