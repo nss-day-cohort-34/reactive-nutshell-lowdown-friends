@@ -6,6 +6,7 @@ import LoginForm from "./auth/Login";
 import Messages from "./messages/MessageSection"
 import TaskSection from "./tasks/TaskSection";
 import TaskAddForm from "./tasks/TaskAddForm";
+import TaskEditForm from "./tasks/TaskEditForm";
 
 export default class ApplicationViews extends Component {
 
@@ -54,6 +55,13 @@ export default class ApplicationViews extends Component {
         <Route path="/tasks/new" render={props => {
           return this.isAuthenticated()
             ? <TaskAddForm {...props} />
+            : <Redirect to="/welcome" />
+        }}
+        />
+
+        <Route path="/tasks/:taskId(\d+)/edit" render={props => {
+          return this.isAuthenticated()
+            ? <TaskEditForm {...props} />
             : <Redirect to="/welcome" />
         }}
         />
