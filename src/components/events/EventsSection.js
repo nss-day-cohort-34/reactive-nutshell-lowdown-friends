@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import EventsHeader from "./EventsHeader"
 import EventsList from "./EventsList"
-
+import "./Events.css"
 export default class EventsSection extends Component {
 
     render() {
