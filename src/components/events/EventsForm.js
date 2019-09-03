@@ -17,8 +17,8 @@ export default class EventsForm extends Component {
 
     constructNewEvent = evt => {
         evt.preventDefault();
-        if (this.state.eventName === "") {
-            window.alert("Please input an event name");
+        if (this.state.eventName === "" || this.state.eventDate === "" || this.state.eventLocation === "") {
+            window.alert("Please fill out all fields");
         } else {
             this.setState({ loadingStatus: true });
             const event = {
