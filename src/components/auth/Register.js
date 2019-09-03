@@ -23,23 +23,27 @@ class RegistrationForm extends Component {
       username: this.state.username,
       password: this.state.password
     }
-    const passwordsMatch = this.checkPasswordsMatch()
-    if (passwordsMatch) {
-      this.checkEmailIsUnique(userObj)
-        .then(isEmailUnique => {
-          if (!isEmailUnique) {
-            this.confirmExistingAccountAndRedirect()
-          } else {
-            this.checkUsernameIsUnique(userObj)
-              .then(isUsernameUnique => {
-                if (!isUsernameUnique) {
-                  alert("Username already taken. Choose a different username.")
-                } else {
-                  this.saveAndLoginNewUserAndRedirectToHome(userObj)
-                }
-              })
-          }
-        })
+    if (userObj.email.length === 0 || userObj.username.length === 0 || userObj.password.length === 0) {
+      window.alert("Please fill in all fields")
+    } else {
+      const passwordsMatch = this.checkPasswordsMatch()
+      if (passwordsMatch) {
+        this.checkEmailIsUnique(userObj)
+          .then(isEmailUnique => {
+            if (!isEmailUnique) {
+              this.confirmExistingAccountAndRedirect()
+            } else {
+              this.checkUsernameIsUnique(userObj)
+                .then(isUsernameUnique => {
+                  if (!isUsernameUnique) {
+                    alert("Username already taken. Choose a different username.")
+                  } else {
+                    this.saveAndLoginNewUserAndRedirectToHome(userObj)
+                  }
+                })
+            }
+          })
+      }
     }
   }
 
