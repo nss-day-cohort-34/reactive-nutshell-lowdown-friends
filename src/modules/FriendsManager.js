@@ -19,8 +19,8 @@ export default {
         })
             .then(result => result.json())
     },
-    deleteFriend(friendId) {
-        return fetch(`${remoteURL}/friends/${friendId}`, {
+    deleteFriendShip(friendship) {
+        return fetch(`${remoteURL}/friends/${friendship.id}`, {
             method: "DELETE"
         })
         .then(result => result.json())
