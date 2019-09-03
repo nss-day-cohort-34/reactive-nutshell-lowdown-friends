@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import './MessageHeader.css'
+
 class MessageHeader extends Component {
   render() {
 
