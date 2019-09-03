@@ -1,32 +1,27 @@
 import React, { Component } from 'react'
 import MessageCard from './MessageCard'
-import MessageManager from '../../modules/MessageManager'
+import './MessageList.css'
 
 class MessageList extends Component {
-  state = {
-    messages: [],
-  }
-
-  componentDidMount() {
-    MessageManager.getAllMessages()
-      .then((messagesArr) => {
-        this.setState({
-          messages: messagesArr
-        })
-      })
-  }
-
   render() {
-
     return (
-      <div className="message__list">
-        {this.state.messages.map(message =>
-          <MessageCard
-            key={message.id}
-            message={message}
-          />
-        )}
-      </div>
+      <>
+        {
+          this.props.messages.length === 0
+            ? <h2>Start a Conversation!</h2>
+            : null
+        }
+        <div className="message__list">
+          {
+            this.props.messages.map(message =>
+              <MessageCard
+                key={message.id}
+                messageObj={message}
+                updateSingleCard={this.props.updateSingleCard}
+              />)
+          }
+        </div>
+      </>
     )
   }
 }
