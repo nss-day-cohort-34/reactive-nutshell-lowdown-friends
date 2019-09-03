@@ -1,0 +1,20 @@
+.activeUserMessage__card {
+align-self: flex-end;
+}
+
+.nonActiveUserMessage__card {
+align-self: flex-start;
+}
+
+.message__card {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 1em;
+  margin: 1em;
+  min-width: 55%;
+  max-width: 75%;
+}
+
+.editMessage__btn {
+  width: 8em;
+}

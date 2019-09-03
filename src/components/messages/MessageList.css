@@ -1,0 +1,7 @@
+.message__list {
+  height: 600px;
+  overflow-y: auto;
+  padding: 1em;
+  display: flex;
+  flex-direction: column-reverse
+}

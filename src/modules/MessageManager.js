@@ -2,15 +2,11 @@ const remoteURL = "http://localhost:5002"
 
 const MessageData = {
   getSingleMessage(id, userId) {
-    return fetch(`${remoteURL}/messages/${id}&userId=${userId}`)
-      .then(result => result.json())
-  },
-  getMessageFromSearch(messageObjProperty, string, userId) {
-    return fetch(`${remoteURL}/messages?${messageObjProperty}=${string}&userId=${userId}`)
+    return fetch(`${remoteURL}/messages/${id}`)
       .then(result => result.json())
   },
   getAllMessages() {
-    return fetch(`${remoteURL}/messages?_expand=user`)
+    return fetch(`${remoteURL}/messages?_expand=user&_sort=date&_order=desc`)
       .then(result => result.json())
   },
   addNewMessageToDatabase(messageObj) {
@@ -24,7 +20,7 @@ const MessageData = {
       .then(result => result.json())
   },
   saveEditedMessageToDatabase(messageObj) {
-    return fetch(`${remoteURL}/messages/`, {
+    return fetch(`${remoteURL}/messages/${messageObj.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

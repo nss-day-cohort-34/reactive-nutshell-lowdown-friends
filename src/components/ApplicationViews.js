@@ -8,8 +8,9 @@ import EventsForm from './events/EventsForm';
 import EventEditForm from './events/EventsEditForm';
 
 import Messages from "./messages/MessageSection"
-import TaskList from "./tasks/TaskList"
+import TaskSection from "./tasks/TaskSection";
 import TaskAddForm from "./tasks/TaskAddForm";
+import TaskEditForm from "./tasks/TaskEditForm";
 
 export default class ApplicationViews extends Component {
 
@@ -72,21 +73,31 @@ export default class ApplicationViews extends Component {
 
         <Route path="/events/:eventId(\d+)/edit" render={props => {
           return this.isAuthenticated()
-          ? <EventEditForm {...props} />
-          : <Redirect to="/welcome" />
+            ? <EventEditForm {...props} />
+            : <Redirect to="/welcome" />
+
         }}
         />
         {/* EVENTS ROUTES END */}
 
         <Route exact path="/tasks" render={props => {
           return this.isAuthenticated()
-            ? <TaskList {...props} />
+            ? <TaskSection {...props} />
             : <Redirect to="/welcome" />
         }}
         />
 
         <Route path="/tasks/new" render={props => {
-          return <TaskAddForm {...props} />
+          return this.isAuthenticated()
+            ? <TaskAddForm {...props} />
+            : <Redirect to="/welcome" />
+        }}
+        />
+
+        <Route path="/tasks/:taskId(\d+)/edit" render={props => {
+          return this.isAuthenticated()
+            ? <TaskEditForm {...props} />
+            : <Redirect to="/welcome" />
         }}
         />
       </React.Fragment>
