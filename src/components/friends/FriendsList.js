@@ -23,8 +23,6 @@ export default class FriendsList extends Component {
         const friendshipToDelete = this.state.friendships.find(friendship => {
             return friendship.userId === friendUserId || friendUserId.otherUser === friendUserId
         })
-        
-        console.log('friendshipToDelete: ', friendshipToDelete);
         FriendsManager.deleteFriendShip(friendshipToDelete)
             .then(this.componentDidMount())
     }
