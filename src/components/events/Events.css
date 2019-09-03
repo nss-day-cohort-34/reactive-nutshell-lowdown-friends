@@ -1,0 +1,11 @@
+.eventCard__div:first-of-type {
+    background-color: #78a3b1;
+    font-weight: 600;
+    font-size: 140%;
+}
+
+.eventCard__div {
+    border: 1px solid #78a3b1;
+    font-weight: 300;
+    padding: 10px;
+}
