@@ -15,47 +15,36 @@ class RegistrationForm extends Component {
     this.setState({ [event.target.id]: event.target.value })
   }
 
-  // Validate that email does not exist in database. If unique, call function to check that username is unique
-  checkEmailIsUnique = (userObj) => {
-    UserData.getUserFromSearch("email", userObj.email)
-    .then((usersArr) => {
-      const emailIsNotUnique = usersArr.length > 0
-      if (emailIsNotUnique) {
-        const userConfirmation = window.confirm("Email already exists. Click \"OK\" to log in as existing user. Click \"Cancel\" to enter a different email.")
-        if (userConfirmation) {
-          this.props.history.push("/login")
-        }
-      } else {
-        this.checkUsernameIsUnique(userObj)
+  // When submit button is clicked, create new user object, run functions to validate user input
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const userObj = {
+      email: this.state.email,
+      username: this.state.username,
+      password: this.state.password
+    }
+    if (userObj.email.length === 0 || userObj.username.length === 0 || userObj.password.length === 0) {
+      window.alert("Please fill in all fields")
+    } else {
+      const passwordsMatch = this.checkPasswordsMatch()
+      if (passwordsMatch) {
+        this.checkEmailIsUnique(userObj)
+          .then(isEmailUnique => {
+            if (!isEmailUnique) {
+              this.confirmExistingAccountAndRedirect()
+            } else {
+              this.checkUsernameIsUnique(userObj)
+                .then(isUsernameUnique => {
+                  if (!isUsernameUnique) {
+                    alert("Username already taken. Choose a different username.")
+                  } else {
+                    this.saveAndLoginNewUserAndRedirectToHome(userObj)
+                  }
+                })
+            }
+          })
       }
-    })
-  }
-
-  // Validate that username does not exist in database. If unique, call function to save new user to database and redirect to "home" page
-  checkUsernameIsUnique = (userObj) => {
-    UserData.getUserFromSearch("username", userObj.username)
-      .then((usersArr) => {
-        const usernameIsNotUnique = usersArr.length > 0
-        if (usernameIsNotUnique) {
-          alert("Username already taken. Choose a different username.")
-        } else {
-          this.saveAndLoginNewUserAndRedirectToHome(userObj)
-        }
-      })
-  }
-
-  // Post new user to database, set new user ID in session storage as "activeUser," and redirect new user to "home" page
-  saveAndLoginNewUserAndRedirectToHome = (userObj) => {
-    UserData.post(userObj)
-      .then((newUser) => {
-        sessionStorage.setItem("activeUser", newUser.id)
-        this.setState({
-          loadingStatus: true
-        })
-      })
-      .then(() => {
-        this.props.history.push("/")
-      })
+    }
   }
 
   // Validate that values entered in "password" and "confirm password" inputs match
@@ -71,18 +60,43 @@ class RegistrationForm extends Component {
     return passwordsMatch
   }
 
-  // When submit button is clicked, create new user object, run functions to validate user input
-  handleSubmit = (event) => {
-    event.preventDefault()
-    const userObj = {
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password
+  // Validate that email does not exist in database. If unique, call function to check that username is unique
+  checkEmailIsUnique = (userObj) => {
+    return UserData.getUserFromSearch("email", userObj.email)
+      .then((usersArr) => {
+        const isEmailUnique = usersArr.length === 0;
+        return isEmailUnique
+      })
+  }
+
+  confirmExistingAccountAndRedirect = () => {
+    const userConfirmation = window.confirm("Email already exists. Click \"OK\" to log in as existing user. Click \"Cancel\" to enter a different email.")
+    if (userConfirmation) {
+      this.props.history.push("/login")
     }
-    const passwordsMatch = this.checkPasswordsMatch()
-    if (passwordsMatch) {
-      this.checkEmailIsUnique(userObj)
-    }
+  }
+
+  // Validate that username does not exist in database. If unique, call function to save new user to database and redirect to "home" page
+  checkUsernameIsUnique = (userObj) => {
+    return UserData.getUserFromSearch("username", userObj.username)
+      .then((usersArr) => {
+        const isUsernameUnique = usersArr.length === 0;
+        return isUsernameUnique
+      })
+  }
+
+  // Post new user to database, set new user ID in session storage as "activeUser," and redirect new user to "home" page
+  saveAndLoginNewUserAndRedirectToHome = (userObj) => {
+    UserData.post(userObj)
+      .then((newUser) => {
+        sessionStorage.setItem("activeUser", newUser.id)
+        this.setState({
+          loadingStatus: true
+        })
+      })
+      .then(() => {
+        this.props.history.push("/")
+      })
   }
 
   render() {
