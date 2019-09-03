@@ -9,7 +9,7 @@ class TaskForm extends Component {
         loadingStatus: false,
     };
 
-    activeUserId = sessionStorage.getItem("activeUser")
+    activeUserId = parseInt(sessionStorage.getItem("activeUser"))
 
     handleFieldChange = evt => {
         const stateToChange = {};
