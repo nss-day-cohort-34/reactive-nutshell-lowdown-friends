@@ -6,10 +6,10 @@ export default class EventsSection extends Component {
 
     render() {
         return (
-            <section className="events__section">
+            <article className="events__section">
                 <EventsHeader {...this.props} />
                 <EventsList {...this.props} />
-            </section>
+            </article>
         )
     }
 }

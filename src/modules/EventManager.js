@@ -5,10 +5,6 @@ export default {
         return fetch(`${remoteURL}/events/${id}`)
             .then(result => result.json())
     },
-    getEventFromSearch(eventObjProperty, string) {
-        return fetch(`${remoteURL}/events?${eventObjProperty}=${string}`)
-            .then(result => result.json())
-    },
     getAll(activeUser) {
         return fetch(`${remoteURL}/events?_sort=date&_order=asc&userId=${activeUser}`)
             .then(result => result.json())
