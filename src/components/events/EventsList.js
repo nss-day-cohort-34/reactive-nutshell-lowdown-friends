@@ -15,7 +15,8 @@ export default class EventsList extends Component {
     }
 
     componentDidMount() {
-        EventsManager.getAll()
+        const activeUser = sessionStorage.getItem("activeUser")
+        EventsManager.getAll(activeUser)
             .then(events => {
                 const currentDate = new Date()
                 currentDate.setDate(currentDate.getDate() - 1);
