@@ -10,7 +10,7 @@ export default {
             .then(result => result.json())
     },
     getAll() {
-        return fetch(`${remoteURL}/events?_sort=date&_order=desc`)
+        return fetch(`${remoteURL}/events?_sort=date&_order=asc`)
             .then(result => result.json())
     },
     addEvent(event) {

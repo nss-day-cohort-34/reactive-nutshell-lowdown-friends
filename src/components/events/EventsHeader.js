@@ -11,6 +11,11 @@ export default class EventsHeader extends Component {
                     }} className="btn btn-primary">
                     Add Event
                 </button>
+                <button onClick={() => { 
+                        this.props.history.push("/events/new") 
+                    }} className="btn btn-primary">
+                    See Past Events
+                </button>
             </header>
         )
     }

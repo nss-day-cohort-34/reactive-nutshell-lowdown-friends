@@ -31,7 +31,6 @@ class EditEditForm extends Component {    //set the initial state
     }
 
     componentDidMount() {
-        console.log(this.props.match)
         EventManager.getSingleEvent(this.props.match.params.eventId)
             .then(edit => {
                 this.setState({
