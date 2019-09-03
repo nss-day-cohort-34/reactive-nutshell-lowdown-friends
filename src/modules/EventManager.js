@@ -1,6 +1,7 @@
 const remoteURL = "http://localhost:5002"
 
 export default {
+    activeUser: sessionStorage.getItem("activeUser"),
     getSingleEvent(id) {
         return fetch(`${remoteURL}/events/${id}`)
             .then(result => result.json())
@@ -10,7 +11,7 @@ export default {
             .then(result => result.json())
     },
     getAll() {
-        return fetch(`${remoteURL}/events?_sort=date&_order=asc`)
+        return fetch(`${remoteURL}/events?_sort=date&_order=asc&userId=${this.activeUser}`)
             .then(result => result.json())
     },
     addEvent(event) {
