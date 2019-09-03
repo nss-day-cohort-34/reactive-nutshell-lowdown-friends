@@ -11,20 +11,16 @@ export default class FriendsList extends Component {
     }
 
     filterFriendsToDisplay = () => {
-        // reduce users to include users' id equals the friendships' userId or the friendships otherUser and the isFriends is true
         const currentFriendsArray = this.state.users.filter(user => {
             return this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
         })
         return currentFriendsArray;
     }
-
-    deleteFriendship = (event) => {
-        const friendUserId = parseInt(event.target.id.split("--")[1])
-        const friendshipToDelete = this.state.friendships.find(friendship => {
-            return friendship.userId === friendUserId || friendUserId.otherUser === friendUserId
-        })
-        FriendsManager.deleteFriendShip(friendshipToDelete)
-            .then(this.componentDidMount())
+    deleteFriendship = friendshipId => {
+        FriendsManager.deleteFriendShip(friendshipId)
+            .then(() => {
+                this.componentDidMount()
+            })
     }
 
     componentDidMount() {
@@ -50,7 +46,8 @@ export default class FriendsList extends Component {
                         return <FriendsCard
                             key={user.id}
                             user={user}
-                            deleteFriendship = {this.deleteFriendship}
+                            deleteFriendship={this.deleteFriendship}
+                            friendship={this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)}
                             {...this.props} />
                     })
                 }
