@@ -1,7 +1,7 @@
 const remoteURL = "http://localhost:5002"
 
 export default {
-    getSingleNew(id) {
+    getSingleNewsArticle(id) {
         return fetch(`${remoteURL}/news/${id}`)
             .then(result => result.json())
     },
@@ -9,7 +9,7 @@ export default {
         return fetch(`${remoteURL}/news?_sort=date&_order=desc&userId=${activeUser}`)
             .then(result => result.json())
     },
-    addNew(newsArticle) {
+    addNewsArticle(newsArticle) {
         return fetch(`${remoteURL}/news/`, {
             method: "POST",
             headers: {
@@ -19,13 +19,13 @@ export default {
         })
             .then(result => result.json())
     },
-    deleteNew(newsId) {
+    deleteNewsArticle(newsId) {
         return fetch(`${remoteURL}/news/${newsId}`, {
             method: "DELETE"
         })
             .then(result => result.json())
     },
-    editNew(editedNews) {
+    editNewsArticle(editedNews) {
         return fetch(`${remoteURL}/news/${editedNews.id}`, {
             method: "PUT",
             headers: {

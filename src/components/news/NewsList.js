@@ -6,8 +6,8 @@ export default class NewsList extends Component {
     state = {
         newsArticles: [],
     }
-    deleteNew = id => {
-        NewsManager.deleteNew(id)
+    deleteNewsArticle = id => {
+        NewsManager.deleteNewsArticle(id)
             .then(() => {
                 this.componentDidMount()
             })
@@ -32,8 +32,9 @@ export default class NewsList extends Component {
                         {this.state.newsArticles.map(newsArticle => {
                             return <NewsCard
                                 key={newsArticle.id}
-                                newsArticle={newsArticle}
-                                deleteNewSArticle={this.deleteNewsArticle}
+                                news={newsArticle}
+                                state={this.state}
+                                deleteNewsArticle={this.deleteNewsArticle}
                                 {...this.props}
                             />
                         })}

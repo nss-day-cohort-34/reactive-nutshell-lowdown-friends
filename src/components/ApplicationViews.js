@@ -10,6 +10,7 @@ import FriendsSection from './friends/FriendsSection';
 
 import NewsSection from './news/NewsSection';
 import NewsForm from './news/NewsForm'
+import NewsEditForm from './news/NewsEditForm';
 import FriendsSearch from './friends/FriendsSearch'
 
 import Messages from "./messages/MessageSection"
@@ -36,6 +37,14 @@ export default class ApplicationViews extends Component {
             ? <NewsForm {...props} />
             : <Redirect to="/welcome" />
         }} />
+        
+        <Route path="/:newsId(\d+)/edit" render={props => {
+          return this.isAuthenticated()
+            ? <NewsEditForm {...props} />
+            : <Redirect to="/welcome" />
+
+        }}
+        />
         {/* Render welcome message */}
         <Route path="/welcome" component={WelcomePage} />
 
@@ -92,19 +101,6 @@ export default class ApplicationViews extends Component {
         />
         {/* EVENTS ROUTES END */}
 
-        {/* NEWS ROUTES START */}
-        
-{/* 
-        
-
-        <Route path="/news/:newsId(\d+)/edit" render={props => {
-          return this.isAuthenticated()
-            ? <NewsEditForm {...props} />
-            : <Redirect to="/welcome" />
-
-        }}
-        /> */}
-        {/* NEWS ROUTES END */}
 
         <Route exact path="/tasks" render={props => {
           return this.isAuthenticated()

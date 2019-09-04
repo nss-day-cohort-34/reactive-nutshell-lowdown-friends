@@ -1,12 +1,11 @@
 import React, { Component } from "react"
-import NewsManager from '../../modules/EventManager';
+import NewsManager from '../../modules/NewsManager';
 
 export default class EventsForm extends Component {
     state = {
-        title: "",
+        newsTitle: "",
         newsURL: "",
-        synopsis: "",
-        date: "",
+        newsSynopsis: "",
         loadingStatus: false,
     };
 
@@ -18,20 +17,21 @@ export default class EventsForm extends Component {
 
     constructNewArticle = evt => {
         evt.preventDefault();
-        if (this.state.eventName === "" || this.state.eventDate === "" || this.state.eventLocation === "") {
+        if (this.state.newsTitle === "" || this.state.newsSynopsis === "" || this.state.newsURL === "") {
             window.alert("Please fill out all fields");
         } else {
             this.setState({ loadingStatus: true });
-            const event = {
-                name: this.state.eventName,
-                date: this.state.eventDate,
-                location: this.state.eventLocation,
+            const newNewsArticle = {
+                title: this.state.newsTitle,
+                date: new Date().toLocaleDateString(),
+                synopsis: this.state.newsSynopsis,
+                url: this.state.newsURL,
                 userId: parseInt(sessionStorage.getItem("activeUser"))
             };
 
-            // Create the event and redirect user to event list
-            NewsManager.addEvent(event)
-                .then(() => this.props.history.push("/events"));
+            // Create the news article and redirect user to news list
+            NewsManager.addNewsArticle(newNewsArticle)
+                .then(() => this.props.history.push("/"));
         }
     };
     render() {
@@ -55,7 +55,7 @@ export default class EventsForm extends Component {
                                 type="text"
                                 required
                                 onChange={this.handleFieldChange}
-                                id="newsUrl"
+                                id="newsURL"
                                 placeholder="https://www.yoururl.com"
                             />
                         </div>
