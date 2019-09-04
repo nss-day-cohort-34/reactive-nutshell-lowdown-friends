@@ -12,28 +12,31 @@ export default class EventsList extends Component {
         friendships: [],
         friendsWithUserInfo: []
     }
+
+    // Handle delete button on an event
     deleteEvent = id => {
         EventsManager.deleteEvent(id)
             .then(() => {
                 this.getAllEvents()
-                .then(allEventsToDisplay => {
-                    this.filterPastAndFutureEvents(allEventsToDisplay)
-                })
+                    .then(allEventsToDisplay => {
+                        this.filterPastAndFutureEvents(allEventsToDisplay)
+                    })
             })
     }
 
     componentDidMount() {
         this.getAllFriendDataAndSetState()
-        .then(() => {
-            this.getAllEvents()
-            .then(allEvents => {
-                this.filterPastAndFutureEvents(allEvents)
+            .then(() => {
+                this.getAllEvents()
+                    .then(allEvents => {
+                        this.filterPastAndFutureEvents(allEvents)
+                    })
             })
-        })
     }
 
     getAllFriendDataAndSetState = () => {
         const activeUserId = sessionStorage.getItem("activeUser")
+        // getAllExcludingActiveUser returns array of user objects with associated events
         UserManager.getAllExcludingActiveUser(activeUserId)
             .then(users => { this.setState({ users: users }) })
         return FriendsManager.getAllFriends("userId", activeUserId)
@@ -51,6 +54,7 @@ export default class EventsList extends Component {
             })
     }
 
+    // Get array of user objects that includes activeUser's friends only
     filterUsersArrToFriends = (allFriendships) => {
         const currentFriendsArray = this.state.users.filter(user => {
             return allFriendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
@@ -58,18 +62,20 @@ export default class EventsList extends Component {
         return currentFriendsArray;
     }
 
+    // Get all events created by activeUser and their friends
     getAllEvents = () => {
         const activeUser = sessionStorage.getItem("activeUser")
         return EventsManager.getAllEventsForActiveUser(activeUser)
-        .then(events => {
-            const friendEventsArr = this.state.friendsWithUserInfo.map(friend => {
-                return friend.events
-            }).flat(1)
-            const allEvents = events.concat(friendEventsArr)
-            return (allEvents)
-        })
+            .then(events => {
+                const friendEventsArr = this.state.friendsWithUserInfo.map(friend => {
+                    return friend.events
+                }).flat(1)
+                const allEvents = events.concat(friendEventsArr)
+                return (allEvents)
+            })
     }
 
+    // Filter allEvents array into pastEvents and futureEvents arrays. Sort arrays ascending by date
     filterPastAndFutureEvents = (events) => {
         const currentDate = new Date()
         currentDate.setDate(currentDate.getDate() - 1);
@@ -81,6 +87,8 @@ export default class EventsList extends Component {
                 ? futureEvents.push(event)
                 : pastEvents.push(event)
         })
+        futureEvents.sort((a, b) => (a.date > b.date) ? 1 : -1)
+        pastEvents.sort((a, b) => (a.date > b.date) ? 1 : -1)
         this.setState({
             futureEvents: futureEvents,
             pastEvents: pastEvents
