@@ -40,20 +40,20 @@ export default class EventsList extends Component {
             .then(friendships => {
                 FriendsManager.getAllFriends("otherUser", activeUserId)
                     .then(otherFriends => {
-                        const allFriends = friendships.concat(otherFriends)
-                        const currentFriendsArray = this.filterUsersArrayDownToFriends(allFriends)
-                        // Use allFriends array to set state for both 'friendships' and 'friendsWithUserInfo' so that 'friendsWithUserInfo' is not dependent on state of 'friendships'
+                        const allFriendships = friendships.concat(otherFriends)
+                        const currentFriendsArray = this.filterUsersArrToFriends(allFriendships)
+                        // Use allFriendships array to set state for both 'friendships' and 'friendsWithUserInfo' so that 'friendsWithUserInfo' is not dependent on state of 'friendships'
                         this.setState({
-                            friendships: allFriends,
+                            friendships: allFriendships,
                             friendsWithUserInfo: currentFriendsArray
                         })
                     })
             })
     }
 
-    filterUsersArrayDownToFriends = (allFriends) => {
+    filterUsersArrToFriends = (allFriendships) => {
         const currentFriendsArray = this.state.users.filter(user => {
-            return allFriends.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
+            return allFriendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
         })
         return currentFriendsArray;
     }
