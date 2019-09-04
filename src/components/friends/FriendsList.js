@@ -16,14 +16,14 @@ export default class FriendsList extends Component {
             this.getAllFriendData()
         })
     }
-    
+
     filterFriendsToDisplay = () => {
         const currentFriendsArray = this.state.users.filter(user => {
             return this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
         })
         return currentFriendsArray;
     }
-    
+
     getAllFriendData = () => {
         const activeUserId = sessionStorage.getItem("activeUser")
         UserManager.getAllExcludingActiveUser(activeUserId)

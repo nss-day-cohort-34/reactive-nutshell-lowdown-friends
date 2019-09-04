@@ -6,9 +6,9 @@ export default class FriendsSection extends Component {
     render () {
        return (
            <section>
-               <FriendsHeader />
+               <FriendsHeader {...this.props}/>
                <FriendsList />
            </section>
-       ) 
+       )
     }
 }
