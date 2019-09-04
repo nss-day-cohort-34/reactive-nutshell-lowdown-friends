@@ -1,0 +1,7 @@
+.completedTask__card {
+    color: lightgray;
+}
+
+.completedTask__card-header {
+    text-decoration: line-through;
+}
