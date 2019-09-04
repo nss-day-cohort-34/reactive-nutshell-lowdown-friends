@@ -16,6 +16,13 @@ export default class FriendsList extends Component {
             this.getAllFriendData()
         })
     }
+    acceptFriendship = friendshipObj => {
+        friendshipObj.isFriend = true
+        FriendsManager.acceptFriendShip(friendshipObj)
+        .then(() => {
+            this.getAllFriendData()
+        })
+    }
 
     filterFriendsToDisplay = (allFriends) => {
         const currentFriendsArray = this.state.users.filter(user => {
@@ -55,6 +62,7 @@ export default class FriendsList extends Component {
                             key={user.id}
                             user={user}
                             deleteFriendship={this.deleteFriendship}
+                            acceptFriendship={this.acceptFriendship}
                             friendship={this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)}
                             {...this.props} />
                     })

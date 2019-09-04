@@ -23,6 +23,16 @@ export default {
         return fetch(`${remoteURL}/friends/${friendshipId}`, {
             method: "DELETE"
         })
-        .then(result => result.json())
+            .then(result => result.json())
+    },
+    acceptFriendShip(friendshipObj) {
+        return fetch(`${remoteURL}/friends/${friendshipObj.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(friendshipObj)
+        })
+            .then(result => result.json())
     }
 }
