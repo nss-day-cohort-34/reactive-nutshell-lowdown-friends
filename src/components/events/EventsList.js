@@ -15,18 +15,24 @@ export default class EventsList extends Component {
     deleteEvent = id => {
         EventsManager.deleteEvent(id)
             .then(() => {
-                this.getAllEventsDataAndSetState()
+                this.getAllEvents()
+                .then(allEventsToDisplay => {
+                    this.filterPastAndFutureEvents(allEventsToDisplay)
+                })
             })
     }
 
     componentDidMount() {
-        this.getAllFriendData()
+        this.getAllFriendDataAndSetState()
         .then(() => {
-            this.getAllEventsDataAndSetState()
+            this.getAllEvents()
+            .then(allEvents => {
+                this.filterPastAndFutureEvents(allEvents)
+            })
         })
     }
 
-    getAllFriendData = () => {
+    getAllFriendDataAndSetState = () => {
         const activeUserId = sessionStorage.getItem("activeUser")
         UserManager.getAllExcludingActiveUser(activeUserId)
             .then(users => { this.setState({ users: users }) })
@@ -35,7 +41,7 @@ export default class EventsList extends Component {
                 FriendsManager.getAllFriends("otherUser", activeUserId)
                     .then(otherFriends => {
                         const allFriends = friendships.concat(otherFriends)
-                        const currentFriendsArray = this.filterFriends(allFriends)
+                        const currentFriendsArray = this.filterUsersArrayDownToFriends(allFriends)
                         // Use allFriends array to set state for both 'friendships' and 'friendsWithUserInfo' so that 'friendsWithUserInfo' is not dependent on state of 'friendships'
                         this.setState({
                             friendships: allFriends,
@@ -45,21 +51,22 @@ export default class EventsList extends Component {
             })
     }
 
-    filterFriends = (allFriends) => {
+    filterUsersArrayDownToFriends = (allFriends) => {
         const currentFriendsArray = this.state.users.filter(user => {
             return allFriends.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
         })
         return currentFriendsArray;
     }
 
-
-
-    getAllEventsDataAndSetState = (currentFriendsArray) => {
+    getAllEvents = () => {
         const activeUser = sessionStorage.getItem("activeUser")
-        // console.log(this.state.users)
-        EventsManager.getAllEventsForActiveUser(activeUser)
+        return EventsManager.getAllEventsForActiveUser(activeUser)
         .then(events => {
-
+            const friendEventsArr = this.state.friendsWithUserInfo.map(friend => {
+                return friend.events
+            }).flat(1)
+            const allEvents = events.concat(friendEventsArr)
+            return (allEvents)
         })
     }
 
