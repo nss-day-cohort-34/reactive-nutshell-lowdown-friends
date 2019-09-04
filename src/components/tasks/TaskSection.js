@@ -3,16 +3,33 @@ import TaskHeader from "./TaskHeader";
 import TaskList from "./TaskList";
 import "./TaskSection.css"
 
-class TaskSection extends Component {
+export default class TaskSection extends Component {
+    constructor(props) {
+        super(props);
+        this.stateHandler = this.stateHandler.bind(this)
+    }
+
+    state = {
+        tasks: [],
+        isHidden: true
+    }
+
+    stateHandler(stateProperty, stateValue) {
+        this.setState({
+            [stateProperty]: stateValue
+        })
+    }
 
     render() {
         return (
             <section className="task__section">
-                <TaskHeader {...this.props} />
-                <TaskList {...this.props} />
+                <TaskHeader {...this.props}
+                    state={this.state}
+                    stateHandler={this.stateHandler} />
+                <TaskList {...this.props}
+                    state={this.state}
+                    stateHandler={this.stateHandler} />
             </section>
         )
     }
 }
-
-export default TaskSection;
