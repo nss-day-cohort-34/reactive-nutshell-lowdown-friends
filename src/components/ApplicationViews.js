@@ -6,7 +6,9 @@ import LoginForm from "./auth/Login";
 import EventsSection from "./events/EventsSection"
 import EventsForm from './events/EventsForm';
 import EventEditForm from './events/EventsEditForm';
-import FriendsSection from './friends/FriendsSection'
+import FriendsSection from './friends/FriendsSection';
+
+import NewsSection from './news/NewsSection';
 
 import Messages from "./messages/MessageSection"
 import TaskSection from "./tasks/TaskSection";
@@ -22,9 +24,9 @@ export default class ApplicationViews extends Component {
       <React.Fragment>
         <Route
           exact path="/" render={props => {
-            // return this.isAuthenticated()
-            // ? <Events />
-            // : <Redirect to="/welcome" />
+            return this.isAuthenticated()
+            ? <NewsSection {...props} />
+            : <Redirect to="/welcome" />
           }}
         />
         {/* Render welcome message */}
@@ -83,6 +85,24 @@ export default class ApplicationViews extends Component {
         }}
         />
         {/* EVENTS ROUTES END */}
+
+        {/* NEWS ROUTES START */}
+        
+{/* 
+        <Route path="/news/new" render={(props) => {
+          return this.isAuthenticated()
+            ? <NewsForm {...props} />
+            : <Redirect to="/welcome" />
+        }} />
+
+        <Route path="/news/:newsId(\d+)/edit" render={props => {
+          return this.isAuthenticated()
+            ? <NewsEditForm {...props} />
+            : <Redirect to="/welcome" />
+
+        }}
+        /> */}
+        {/* NEWS ROUTES END */}
 
         <Route exact path="/tasks" render={props => {
           return this.isAuthenticated()
