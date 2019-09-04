@@ -6,7 +6,7 @@ class TaskHeader extends Component {
         return (
             <header className="task__header">
                 <h1>Tasks</h1>
-                <button type="button" onClick={() =>
+                <button type="button" className="btn btn-primary" onClick={() =>
                     this.props.history.push("/tasks/new")}>Add Task</button>
             </header>
         );

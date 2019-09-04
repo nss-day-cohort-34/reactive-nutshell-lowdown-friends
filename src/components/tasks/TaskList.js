@@ -43,7 +43,7 @@ class TaskList extends Component {
     render() {
         return (
             <>
-            <button onClick={this.toggleHidden.bind(this)}>Show/Hide Completed Tasks</button>
+            <button className="btn btn-primary" onClick={this.toggleHidden.bind(this)}>Show/Hide Completed Tasks</button>
                 <div className="task__list">
                     {this.state.tasks.filter(task => task.isCompleted === false)
                         .map(task =>

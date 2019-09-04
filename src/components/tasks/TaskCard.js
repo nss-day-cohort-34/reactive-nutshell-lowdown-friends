@@ -23,7 +23,7 @@ class TaskCard extends Component {
                 <div className="task__card-content">
                     <p>Estimated Completion Date: {this.props.task.date}</p>
                     <p>Mark as Completed: <input type="checkbox" id="isCompleted" checked={this.props.task.isCompleted} onChange={this.handleCheck} /></p>
-                    <button type="button" onClick={() => this.props.deleteTask(this.props.task.id)}>Delete</button>
+                    <button type="button" className="delete__button btn btn-danger mx-3" onClick={() => this.props.deleteTask(this.props.task.id)}>Delete</button>
                 </div>
             </div>
         );
