@@ -17,9 +17,9 @@ export default class FriendsList extends Component {
         })
     }
 
-    filterFriendsToDisplay = () => {
+    filterFriendsToDisplay = (allFriends) => {
         const currentFriendsArray = this.state.users.filter(user => {
-            return this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
+            return allFriends.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
         })
         return currentFriendsArray;
     }
@@ -33,8 +33,11 @@ export default class FriendsList extends Component {
                 FriendsManager.getAllFriends("otherUser", activeUserId)
                     .then(otherFriends => {
                         const allFriends = friendships.concat(otherFriends)
-                        this.setState({ friendships: allFriends })
-                        this.setState({ friendsWithUserInfo: this.filterFriendsToDisplay() })
+                        // Use allFriends array to set state for both 'friendships' and 'friendsWithUserInfo' so that 'friendsWithUserInfo' is not dependent on state of 'friendships'
+                        this.setState({
+                            friendships: allFriends,
+                            friendsWithUserInfo: this.filterFriendsToDisplay(allFriends)
+                        })
                     })
             })
     }

@@ -8,7 +8,7 @@ export default class FriendsHeader extends Component {
                 <button onClick={() => {
                     this.props.history.push("/friends/new")
                 }}
-                className="btn btn-primary addFriends__button">Add Friends</button>
+                className="btn btn-primary findNewFriends__button">Find New Friends</button>
                 <button className="btn btn-primary ml-5 seeRequests__button">See Requests</button>
             </header>
         )
