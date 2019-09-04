@@ -3,20 +3,14 @@ import TaskCard from './TaskCard';
 import TaskCompleted from './TaskCompleted';
 import TaskManager from '../../modules/TaskManager';
 
-class TaskList extends Component {
-    state = {
-        tasks: [],
-        isHidden: true,
-    }
+export default class TaskList extends Component {
 
     activeUserId = sessionStorage.getItem("activeUser")
 
     componentDidMount() {
         TaskManager.getAllTasks(this.activeUserId)
             .then((tasks) => {
-                this.setState({
-                    tasks: tasks
-                })
+                this.props.stateHandler('tasks',tasks)
             })
     }
 
@@ -34,18 +28,11 @@ class TaskList extends Component {
             })
     }
 
-    toggleHidden() {
-        this.setState({
-            isHidden: !this.state.isHidden
-        })
-    }
-
     render() {
         return (
             <>
-            <button className="btn btn-primary" onClick={this.toggleHidden.bind(this)}>Show/Hide Completed Tasks</button>
                 <div className="task__list">
-                    {this.state.tasks.filter(task => task.isCompleted === false)
+                    {this.props.state.tasks.filter(task => task.isCompleted === false)
                         .map(task =>
                             <TaskCard
                                 key={task.id}
@@ -57,7 +44,7 @@ class TaskList extends Component {
                         )}
                 </div>
                 <div className="task__completed">
-                    {this.state.tasks.filter(task => task.isCompleted === true && !this.state.isHidden)
+                    {this.props.state.tasks.filter(task => task.isCompleted === true && !this.props.state.isHidden)
                         .map(task =>
                             <TaskCompleted
                                 key={task.id}
@@ -72,5 +59,3 @@ class TaskList extends Component {
         )
     }
 }
-
-export default TaskList;

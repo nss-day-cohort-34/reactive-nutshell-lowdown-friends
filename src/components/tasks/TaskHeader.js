@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-class TaskHeader extends Component {
+export default class TaskHeader extends Component {
+
+    toggleHidden = () => {
+        this.props.stateHandler("isHidden", !this.props.state.isHidden)
+    }
 
     render() {
         return (
@@ -8,9 +12,8 @@ class TaskHeader extends Component {
                 <h1>Tasks</h1>
                 <button type="button" className="btn btn-primary" onClick={() =>
                     this.props.history.push("/tasks/new")}>Add Task</button>
+                <button className="btn btn-primary" onClick={this.toggleHidden}>Show/Hide Completed Tasks</button>
             </header>
         );
     }
 }
-
-export default TaskHeader;
