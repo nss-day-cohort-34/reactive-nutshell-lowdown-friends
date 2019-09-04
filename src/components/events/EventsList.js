@@ -38,7 +38,7 @@ export default class EventsList extends Component {
 
     render() {
         return (
-            <>
+            <>                
                 <div className="eventList__div container">
                     <h2 className="text-center my-5">EventsList</h2>
                     <div className="row">

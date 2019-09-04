@@ -13,6 +13,10 @@ const UserData = {
     return fetch(`${remoteURL}/users`)
       .then(result => result.json())
   },
+  getAllExcludingActiveUser(activeUserId) {
+    return fetch(`${remoteURL}/users?id_ne=${activeUserId}`)
+      .then(result => result.json())
+  },
   post(user) {
     return fetch(`${remoteURL}/users/`, {
       method: "POST",
