@@ -22,8 +22,8 @@ class TaskCard extends Component {
                     onClick={() => { this.props.history.push(`/tasks/${this.props.task.id}/edit`) }}>{this.props.task.name}</button></p>
                 <div className="task__card-content">
                     <p>Estimated Completion Date: {this.props.task.date}</p>
-                    <p>Mark as Completed: <input type="checkbox" id="isCompleted" checked={this.props.task.isCompleted} onChange={this.handleCheck} /></p>
-                    <button type="button" onClick={() => this.props.deleteTask(this.props.task.id)}>Delete</button>
+                    <p>Completed: <input type="checkbox" id="isCompleted" checked={this.props.task.isCompleted} onChange={this.handleCheck} /></p>
+                    <button type="button" className="delete__button btn btn-danger mx-3" onClick={() => this.props.deleteTask(this.props.task.id)}>Delete</button>
                 </div>
             </div>
         );
