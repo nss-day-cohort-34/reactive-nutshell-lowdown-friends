@@ -9,13 +9,13 @@ export default {
         return fetch(`${remoteURL}/friends?${friendObjProperty}=${searchId}`)
             .then(result => result.json())
     },
-    addFriend(friend) {
+    addFriendshipRequest(friendshipObj) {
         return fetch(`${remoteURL}/friends/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(friend)
+            body: JSON.stringify(friendshipObj)
         })
             .then(result => result.json())
     },

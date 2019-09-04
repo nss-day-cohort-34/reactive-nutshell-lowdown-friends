@@ -8,7 +8,8 @@ export default class FriendsSearch extends Component {
     users: [],
     friendships: [],
     potentialFriends: [],
-    friendsSearch_input: []
+    friendSearchMatches: [],
+    loadingStatus: false
   }
 
   getAllFriendData = () => {
@@ -42,20 +43,33 @@ export default class FriendsSearch extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({ [event.target.id]: event.target.value })
     const filteredPotentialFriends = this.state.potentialFriends.filter(user => {
-      return user.username.includes(this.state.friendsSearch_input)
+      return user.username.includes(event.target.value)
     })
-    this.setState({potentialFriends: filteredPotentialFriends})
+    this.setState({friendSearchMatches: filteredPotentialFriends})
+  }
+
+  addFriendship = (otherUserId) => {
+    const activeUserId = parseInt(sessionStorage.getItem("activeUser"))
+    const newFriendshipObj = {
+      userId: activeUserId,
+      otherUser: otherUserId,
+      isFriend: false
+    }
+    FriendsManager.addFriendshipRequest(newFriendshipObj)
+    .then(() => {
+      window.alert("Friend request sent!")
+      this.props.history.push("/friends")
+    })
   }
 
   render() {
     return (
       <section className="friendsSearch__section">
-        <input className="friendsSearch__input" id="friendsSearch_input" type="text"
-        onChange={this.handleChange} />
+        <input placeholder="Search for new friends" className="friendsSearch__input" id="friendsSearch_input" type="text"
+        onKeyUp={this.handleChange} />
         {
-          this.state.potentialFriends.map(user => {
+          this.state.friendSearchMatches.map(user => {
             return <FriendsSearchCard
               key={user.id}
               user={user}

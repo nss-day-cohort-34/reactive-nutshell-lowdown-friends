@@ -48,7 +48,7 @@ export default class ApplicationViews extends Component {
         <Route
         path="/friends/new" render={props => {
           return this.isAuthenticated()
-          ? <FriendsSearch />
+          ? <FriendsSearch {...props} />
           : <Redirect to="/welcome" />
         }}
         />
