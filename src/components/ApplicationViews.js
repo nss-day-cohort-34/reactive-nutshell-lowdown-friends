@@ -8,7 +8,6 @@ import EventsForm from './events/EventsForm';
 import EventEditForm from './events/EventsEditForm';
 import FriendsSection from './friends/FriendsSection'
 import FriendsSearch from './friends/FriendsSearch'
-
 import Messages from "./messages/MessageSection"
 import TaskSection from "./tasks/TaskSection";
 import TaskAddForm from "./tasks/TaskAddForm";
@@ -58,13 +57,6 @@ export default class ApplicationViews extends Component {
             return this.isAuthenticated()
               ? <Messages />
               : <Redirect to="/welcome" />
-          }}
-        />
-
-        <Route
-          path="/tasks" render={props => {
-            return null
-            // Remove null and return the component which will show the user's tasks
           }}
         />
 
