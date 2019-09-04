@@ -18,7 +18,8 @@ export default class FriendsCard extends Component {
                     :
                     this.props.friendship.userId === this.activeUser
                     ? <button disabled>Pending</button>
-                    : <button onClick={() => this.props.acceptFriendship(this.props.friendship)}>Accept Request</button>
+                    : <> <button onClick={() => this.props.acceptFriendship(this.props.friendship)}>Accept Request</button>
+                    <button onClick={() => this.props.deleteFriendship(this.props.friendship.id)}>Deny Request</button> </>
                 }
             </div>
         )
