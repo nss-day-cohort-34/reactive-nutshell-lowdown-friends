@@ -16,14 +16,21 @@ export default class FriendsList extends Component {
             this.getAllFriendData()
         })
     }
-    
-    filterFriendsToDisplay = () => {
+    acceptFriendship = friendshipObj => {
+        friendshipObj.isFriend = true
+        FriendsManager.acceptFriendShip(friendshipObj)
+        .then(() => {
+            this.getAllFriendData()
+        })
+    }
+
+    filterFriendsToDisplay = (allFriends) => {
         const currentFriendsArray = this.state.users.filter(user => {
-            return this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
+            return allFriends.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
         })
         return currentFriendsArray;
     }
-    
+
     getAllFriendData = () => {
         const activeUserId = sessionStorage.getItem("activeUser")
         UserManager.getAllExcludingActiveUser(activeUserId)
@@ -33,8 +40,11 @@ export default class FriendsList extends Component {
                 FriendsManager.getAllFriends("otherUser", activeUserId)
                     .then(otherFriends => {
                         const allFriends = friendships.concat(otherFriends)
-                        this.setState({ friendships: allFriends })
-                        this.setState({ friendsWithUserInfo: this.filterFriendsToDisplay() })
+                        // Use allFriends array to set state for both 'friendships' and 'friendsWithUserInfo' so that 'friendsWithUserInfo' is not dependent on state of 'friendships'
+                        this.setState({
+                            friendships: allFriends,
+                            friendsWithUserInfo: this.filterFriendsToDisplay(allFriends)
+                        })
                     })
             })
     }
@@ -52,6 +62,7 @@ export default class FriendsList extends Component {
                             key={user.id}
                             user={user}
                             deleteFriendship={this.deleteFriendship}
+                            acceptFriendship={this.acceptFriendship}
                             friendship={this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)}
                             {...this.props} />
                     })

@@ -9,13 +9,13 @@ export default {
         return fetch(`${remoteURL}/friends?${friendObjProperty}=${searchId}`)
             .then(result => result.json())
     },
-    addFriend(friend) {
+    addFriendshipRequest(friendshipObj) {
         return fetch(`${remoteURL}/friends/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(friend)
+            body: JSON.stringify(friendshipObj)
         })
             .then(result => result.json())
     },
@@ -23,6 +23,16 @@ export default {
         return fetch(`${remoteURL}/friends/${friendshipId}`, {
             method: "DELETE"
         })
-        .then(result => result.json())
+            .then(result => result.json())
+    },
+    acceptFriendShip(friendshipObj) {
+        return fetch(`${remoteURL}/friends/${friendshipObj.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(friendshipObj)
+        })
+            .then(result => result.json())
     }
 }
