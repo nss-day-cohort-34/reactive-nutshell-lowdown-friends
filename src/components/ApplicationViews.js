@@ -7,6 +7,7 @@ import EventsSection from "./events/EventsSection"
 import EventsForm from './events/EventsForm';
 import EventEditForm from './events/EventsEditForm';
 import FriendsSection from './friends/FriendsSection'
+import FriendsSearch from './friends/FriendsSearch'
 
 import Messages from "./messages/MessageSection"
 import TaskSection from "./tasks/TaskSection";
@@ -35,16 +36,22 @@ export default class ApplicationViews extends Component {
 
         {/* Render login form */}
         <Route path="/login" component={LoginForm} />
-        
-        { 
+
         <Route
-          path="/friends" render={props => {
+          exact path="/friends" render={props => {
             return this.isAuthenticated()
-            ? <FriendsSection />
+            ? <FriendsSection {...props} />
             : <Redirect to="/welcome" />
-            // Remove null and return the component which will show list of friends
           }}
-        />}
+        />
+
+        <Route
+        path="/friends/new" render={props => {
+          return this.isAuthenticated()
+          ? <FriendsSearch {...props} />
+          : <Redirect to="/welcome" />
+        }}
+        />
 
         <Route
           path="/messages" render={props => {
