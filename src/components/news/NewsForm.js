@@ -61,8 +61,7 @@ export default class EventsForm extends Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="newsSynopsis">Synopsis</label>
-                            <input
-                                type="date"
+                            <textarea
                                 required
                                 onChange={this.handleFieldChange}
                                 id="newsSynopsis"

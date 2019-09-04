@@ -33,7 +33,7 @@ export default class NewsList extends Component {
                             return <NewsCard
                                 key={newsArticle.id}
                                 newsArticle={newsArticle}
-                                deleteNew={this.deleteNewsArticle}
+                                deleteNewSArticle={this.deleteNewsArticle}
                                 {...this.props}
                             />
                         })}
