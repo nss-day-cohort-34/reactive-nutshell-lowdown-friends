@@ -10,20 +10,21 @@ export default class FriendsList extends Component {
         friendsWithUserInfo: []
     }
 
+    deleteFriendship = friendshipId => {
+        FriendsManager.deleteFriendShip(friendshipId)
+        .then(() => {
+            this.getAllFriendData()
+        })
+    }
+    
     filterFriendsToDisplay = () => {
         const currentFriendsArray = this.state.users.filter(user => {
             return this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
         })
         return currentFriendsArray;
     }
-    deleteFriendship = friendshipId => {
-        FriendsManager.deleteFriendShip(friendshipId)
-            .then(() => {
-                this.componentDidMount()
-            })
-    }
-
-    componentDidMount() {
+    
+    getAllFriendData = () => {
         const activeUserId = sessionStorage.getItem("activeUser")
         UserManager.getAllExcludingActiveUser(activeUserId)
             .then(users => { this.setState({ users: users }) })
@@ -36,6 +37,10 @@ export default class FriendsList extends Component {
                         this.setState({ friendsWithUserInfo: this.filterFriendsToDisplay() })
                     })
             })
+    }
+
+    componentDidMount() {
+        this.getAllFriendData()
     }
 
     render() {

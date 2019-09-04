@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 export default class FriendsCard extends Component {
+    componentDidMount() {
+        this.setState({ friendshipId: this.props.friendship.id })
+    }
     render() {
         return (
             <div className="friendCard__div">
