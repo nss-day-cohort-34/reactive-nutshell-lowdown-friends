@@ -39,20 +39,6 @@ export default class EventsList extends Component {
                 }).flat(1)
                 const allEvents = events.concat(friendEventsArr)
                 return allEvents
-                const currentDate = new Date()
-                currentDate.setDate(currentDate.getDate() - 1);
-                const futureEvents = []
-                const pastEvents = []
-                events.map(event => {
-                    const eventDate = new Date(event.date)
-                    return (eventDate >= currentDate)
-                        ? futureEvents.push(event)
-                        : pastEvents.push(event)
-                })
-                this.setState({
-                    futureEvents: futureEvents,
-                    pastEvents: pastEvents
-                })
             })
     }
 
