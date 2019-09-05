@@ -66,11 +66,11 @@ class EditEditForm extends Component {    //set the initial state
                         <div className="formgroup">
                             <label htmlFor="editURL">URL</label>
                             <input
-                                type="url"
+                                type="text"
                                 required
                                 className="form-control"
                                 onChange={this.handleFieldChange}
-                                id="editLocation"
+                                id="editURL"
                                 value={this.state.editURL}
                             />
                         </div>
