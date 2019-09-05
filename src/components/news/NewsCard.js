@@ -12,7 +12,12 @@ export default class NewsCard extends Component {
 
     render() {
         return (
-            <div className="newsCard__div col-md-4 my-4 card" style={this.newsCardStyle}>
+            <div className={`col-md-4 my-4 card
+            ${this.activeUser !== this.props.news.userId
+            ? "friendsNewsCard__div"
+            : "newsCard__div"}`
+            }
+            style={this.newsCardStyle}>
                 <div className="card-body">
                     <h4 className="newsTitle__h4 card-title"><span>{this.props.news.title}</span></h4>
                     <p className="newsDate__p card-subtitle">Timestamp: <span>{(this.props.news.date)}</span></p>
