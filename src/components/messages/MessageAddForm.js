@@ -9,21 +9,23 @@ class AddMessageForm extends Component {
     return (
       <>
         <form>
-          <div className="addMessage__form">
+          <div className="addMessage__form input-group">
             <input
               type="text"
               onChange={this.props.handleAddChange}
               id="message"
               placeholder="Your message here"
               value={this.props.message}
-              className="addMessage__input"
+              className="addMessage__input form-control"
             />
-            <button
-              type="button"
-              className="addMessage__button"
-              disabled={this.props.loadingStatus}
-              onClick={this.props.handlePostNewMessageButton}
-            >Post New Message</button>
+            <div className="input-group-append">
+              <button
+                type="button"
+                className="addMessage__button btn btn-outline-primary"
+                disabled={this.props.loadingStatus}
+                onClick={this.props.handlePostNewMessageButton}
+              >Post New Message</button>
+            </div>
           </div>
         </form>
       </>

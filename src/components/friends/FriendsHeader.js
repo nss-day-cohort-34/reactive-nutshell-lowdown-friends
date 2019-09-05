@@ -6,8 +6,8 @@ import React, { Component } from 'react';
 export default class FriendsHeader extends Component {
     render() {
         return (
-            <header>
-                <h1>Friends</h1>
+            <header className="text-center my-5">
+                <h1 className="my-3">Friends</h1>
                 <button onClick={() => {
                     this.props.history.push("/friends/new")
                 }}

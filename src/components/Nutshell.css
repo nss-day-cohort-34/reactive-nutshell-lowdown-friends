@@ -1,0 +1,21 @@
+.btn-danger {
+    background-color: #db6262;
+    border-color: #db6262;
+}
+.btn-info {
+    background-color: #5d9092;
+    border-color: #5d9092;
+}
+
+.btn-primary {
+    background-color: #3f9afb;
+    border-color: #3f9afb;
+}
+.btn-success {
+    background-color: #41c760;
+    border-color: #41c760;
+}
+
+.jumbotron {
+    height: 100vh;
+}

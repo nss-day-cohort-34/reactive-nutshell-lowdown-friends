@@ -26,7 +26,7 @@ export default class FriendsList extends Component {
 
     render() {
         return (
-            <section className="friendsList__section">
+            <section className="friendsList__section mt-5">
                 {
                     this.props.friendData.friendsWithUserInfo.map(user => {
                         return <FriendsCard

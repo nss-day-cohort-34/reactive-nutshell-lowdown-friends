@@ -14,7 +14,3 @@ align-self: flex-start;
   min-width: 55%;
   max-width: 75%;
 }
-
-.editMessage__btn {
-  width: 8em;
-}

@@ -12,18 +12,20 @@ export default class FriendsCard extends Component {
 
     render() {
         return (
-            <div className="friendCard__div">
+            <div className="col-md-4 friendCard__div card">
+                <div className="card-body">
                 <h3 className="friendName__h3">{this.props.user.username}</h3>
 
                 {
                     this.props.friendship.isFriend
-                    ? <button onClick={() => this.props.deleteFriendship(this.props.friendship.id)} className="deleteFriend__button">Delete</button>
+                    ? <button onClick={() => this.props.deleteFriendship(this.props.friendship.id)} className="deleteFriend__button btn btn-sm btn-danger card-link">Delete</button>
                     :
                     this.props.friendship.userId === this.activeUser
-                    ? <button disabled>Pending</button>
-                    : <> <button onClick={() => this.props.acceptFriendship(this.props.friendship)}>Accept Request</button>
-                    <button onClick={() => this.props.deleteFriendship(this.props.friendship.id)}>Deny Request</button> </>
+                    ? <button className="btn btn-secondary btn-sm card-link"disabled>Pending</button>
+                    : <> <button onClick={() => this.props.acceptFriendship(this.props.friendship)} className="btn btn-success btn-sm card-link">Accept Request</button>
+                    <button onClick={() => this.props.deleteFriendship(this.props.friendship.id)} className="btn btn-danger btn-sm card-link">Deny Request</button> </>
                 }
+                </div>
             </div>
         )
     }
