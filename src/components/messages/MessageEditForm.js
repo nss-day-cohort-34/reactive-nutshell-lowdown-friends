@@ -20,7 +20,7 @@ class EditMessageForm extends Component {
               />
               <button
                 type="button"
-                className="saveMessageChanges__btn"
+                className="saveMessageChanges__btn btn btn-success btn-sm"
                 disabled={!this.props.editMessageObj.editing}
                 onClick={this.props.handleSaveChangesButton}
               >Save Changes</button>
