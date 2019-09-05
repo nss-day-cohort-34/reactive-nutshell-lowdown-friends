@@ -1,6 +1,7 @@
-// Author: Will Wilkinson and Jacquelyn McCray
+// Author: Will Wilkinson
 // Purpose: Render an article tag containing EventsHeader and EventsList Componentimport React, { Component } from "react";
 
+import React, { Component } from "react";
 import EventsHeader from "./EventsHeader"
 import EventsList from "./EventsList"
 import "./Events.css"
