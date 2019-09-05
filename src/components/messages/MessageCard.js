@@ -1,6 +1,10 @@
+// Author: Jacquelyn McCray
+// Purpose: Component displays a single message. Conditionally renders 'edit' button based on activeUser Id and the Id of the user who created the message.
+
 import React, { Component } from 'react';
 import EditMessageForm from './MessageEditForm'
 import MessageManager from '../../modules/MessageManager'
+import FriendsManager from '../../modules/FriendsManager'
 
 import './MessageCard.css'
 
@@ -52,8 +56,28 @@ class MessageCard extends Component {
         this.setState({ editing: false })
         this.props.updateSingleCard(editedMessageObj)
       })
+  }
 
-
+  // Handle instance when user clicks on username. If selected user is not already a friend, have user confirm they want to add the user as a friend
+  handleClickNameToAddFriendship = (event) => {
+    const activeUserId = parseInt(sessionStorage.getItem("activeUser"))
+    const otherUserId = parseInt(event.target.id.split("--")[1])
+    const friendIdsArr = this.props.friendData.friendsWithUserInfo.map(friend => friend.id)
+    if (!friendIdsArr.includes(otherUserId) && activeUserId !== otherUserId) {
+      const userConfirmation = window.confirm(`Do you want to add ${event.target.textContent} as a friend?`)
+      if (userConfirmation) {
+        const newFriendshipObj = {
+          userId: activeUserId,
+          otherUser: otherUserId,
+          isFriend: false
+        }
+        FriendsManager.addFriendshipRequest(newFriendshipObj)
+          .then(() => {
+            window.alert("Friend request sent!")
+            this.props.getAllFriendData()
+          })
+      }
+    }
   }
 
   // JSX for the message text and 'edit message' button. Receives the message text as an argument.
@@ -80,15 +104,19 @@ class MessageCard extends Component {
   // Render an individual message card, based on conditions described below
   render() {
     return (
-      <div className={
-        // Ternary expression determines class to be added to card based on userId
-        this.activeUser === this.userIdInMessageObj
+      // Ternary expression determines class to be added to card based on userId
+      <div className={`message__card
+        ${this.activeUser === this.userIdInMessageObj
           ?
-          "activeUserMessage__card message__card"
+          "activeUserMessage__card"
           :
-          "nonActiveUserMessage__card message__card"
+          "nonActiveUserMessage__card"}`
       }>
-        <h3>{this.props.messageObj.user.username}</h3>
+        <h3
+          onClick={this.handleClickNameToAddFriendship}
+          id={"message-username--" + this.props.messageObj.user.id}>
+          {this.props.messageObj.user.username}
+        </h3>
         <>
           {
             // Ternary expression determines whether message text or edit form will render

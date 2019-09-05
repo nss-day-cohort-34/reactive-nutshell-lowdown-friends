@@ -1,3 +1,6 @@
+// Author: Will Wilkinson
+// Purpose: Handle all fetch calls to the events API
+
 const remoteURL = "http://localhost:5002"
 
 export default {
@@ -5,8 +8,12 @@ export default {
         return fetch(`${remoteURL}/events/${id}`)
             .then(result => result.json())
     },
-    getAll(activeUser) {
+    getAllEventsForActiveUser(activeUser) {
         return fetch(`${remoteURL}/events?_sort=date&_order=asc&userId=${activeUser}`)
+            .then(result => result.json())
+    },
+    getAll() {
+        return fetch(`${remoteURL}/events?_sort=date&_order=asc&_expand=user`)
             .then(result => result.json())
     },
     addEvent(event) {

@@ -1,42 +1,28 @@
+// Author: Will Wilkinson, Sarah Fleming, Jacquelyn McCray
+// Purpose: Allow users to search for potential friends and request to add them as friends
+
 import React, { Component } from "react";
-import UserManager from "../../modules/UserManager";
 import FriendsManager from "../../modules/FriendsManager";
 import FriendsSearchCard from './FriendsSearchCard';
 
 export default class FriendsSearch extends Component {
   state = {
-    users: [],
-    friendships: [],
     potentialFriends: [],
     friendSearchMatches: [],
-    loadingStatus: false
-  }
-
-  getAllFriendData = () => {
-    const activeUserId = sessionStorage.getItem("activeUser")
-    UserManager.getAllExcludingActiveUser(activeUserId)
-      .then(users => { this.setState({ users: users }) })
-    return FriendsManager.getAllFriends("userId", activeUserId)
-      .then(friendships => {
-        FriendsManager.getAllFriends("otherUser", activeUserId)
-          .then(otherFriends => {
-            const allFriends = friendships.concat(otherFriends)
-            this.setState({ friendships: allFriends })
-            this.setState({ potentialFriends: this.searchPotentialFriendsToDisplay() })
-          })
-      })
   }
 
   componentDidMount() {
-    this.getAllFriendData()
+    this.props.getAllFriendData()
+      .then(() => this.setState({ potentialFriends: this.searchPotentialFriendsToDisplay() }))
   }
+
   searchPotentialFriendsToDisplay = () => {
     // Get all current friends as an array of user objects and store in a variable
-    const currentFriends = this.state.users.filter(user => {
-      return this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
+    const currentFriends = this.props.friendData.users.filter(user => {
+      return this.props.friendData.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
     })
     // Compare users array with current friends array and return only users not included in current friends array
-    const potentialFriends = this.state.users.filter(user => {
+    const potentialFriends = this.props.friendData.users.filter(user => {
       return !currentFriends.includes(user)
     })
     return potentialFriends;
@@ -44,9 +30,9 @@ export default class FriendsSearch extends Component {
 
   handleChange = (event) => {
     const filteredPotentialFriends = this.state.potentialFriends.filter(user => {
-      return user.username.includes(event.target.value)
+      return user.username.toLowerCase().includes(event.target.value.toLowerCase())
     })
-    this.setState({friendSearchMatches: filteredPotentialFriends})
+    this.setState({ friendSearchMatches: filteredPotentialFriends })
   }
 
   addFriendship = (otherUserId) => {
@@ -57,17 +43,17 @@ export default class FriendsSearch extends Component {
       isFriend: false
     }
     FriendsManager.addFriendshipRequest(newFriendshipObj)
-    .then(() => {
-      window.alert("Friend request sent!")
-      this.props.history.push("/friends")
-    })
+      .then(() => {
+        window.alert("Friend request sent!")
+        this.props.history.push("/friends")
+      })
   }
 
   render() {
     return (
       <section className="friendsSearch__section">
         <input placeholder="Search for new friends" className="friendsSearch__input" id="friendsSearch_input" type="text"
-        onKeyUp={this.handleChange} />
+          onKeyUp={this.handleChange} />
         {
           this.state.friendSearchMatches.map(user => {
             return <FriendsSearchCard

@@ -1,3 +1,6 @@
+// Author: Jacquelyn McCray
+// Purpose: Component handles editing a message. Displays input field and save button within message card.
+
 import React, { Component } from 'react';
 
 import './MessageEditForm.css'

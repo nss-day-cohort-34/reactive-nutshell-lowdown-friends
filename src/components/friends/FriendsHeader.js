@@ -1,3 +1,6 @@
+// Author: Will Wilkinson, Sarah Fleming, Jacquelyn McCray
+// Purpose: Render header element containing an h1 and a button that routes the user to a page to search for other users to add as friends
+
 import React, { Component } from 'react';
 
 export default class FriendsHeader extends Component {

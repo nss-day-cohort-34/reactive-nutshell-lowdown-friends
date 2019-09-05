@@ -1,3 +1,6 @@
+// Author: Will Wilkinson
+// Purpose: Render a form that allows the user to edit an event, and handle the PUT functionality when they submit
+
 import React, { Component } from "react"
 import EventManager from "../../modules/EventManager"
 

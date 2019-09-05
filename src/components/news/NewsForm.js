@@ -1,14 +1,14 @@
 // Author: Will Wilkinson
-// Purpose: Render a form that allows the user to add a new event to the API, and handle the POST functionality when they submit
+// Purpose: Render a form that allows the user to add a new article to the API, and handle the POST functionality when they submit
 
 import React, { Component } from "react"
-import EventManager from '../../modules/EventManager';
+import NewsManager from '../../modules/NewsManager';
 
 export default class EventsForm extends Component {
     state = {
-        eventName: "",
-        eventDate: "",
-        eventLocation: "",
+        newsTitle: "",
+        newsURL: "",
+        newsSynopsis: "",
         loadingStatus: false,
     };
 
@@ -18,22 +18,23 @@ export default class EventsForm extends Component {
         this.setState(stateToChange);
     };
 
-    constructNewEvent = evt => {
+    constructNewArticle = evt => {
         evt.preventDefault();
-        if (this.state.eventName === "" || this.state.eventDate === "" || this.state.eventLocation === "") {
+        if (this.state.newsTitle === "" || this.state.newsSynopsis === "" || this.state.newsURL === "") {
             window.alert("Please fill out all fields");
         } else {
             this.setState({ loadingStatus: true });
-            const event = {
-                name: this.state.eventName,
-                date: this.state.eventDate,
-                location: this.state.eventLocation,
+            const newNewsArticle = {
+                title: this.state.newsTitle,
+                date: new Date().toLocaleDateString(),
+                synopsis: this.state.newsSynopsis,
+                url: this.state.newsURL,
                 userId: parseInt(sessionStorage.getItem("activeUser"))
             };
 
-            // Create the event and redirect user to event list
-            EventManager.addEvent(event)
-                .then(() => this.props.history.push("/events"));
+            // Create the news article and redirect user to news list
+            NewsManager.addNewsArticle(newNewsArticle)
+                .then(() => this.props.history.push("/"));
         }
     };
     render() {
@@ -42,40 +43,39 @@ export default class EventsForm extends Component {
                 <form className="mt-5">
                     <fieldset className="text-center">
                         <div className="form-group">
-                            <label htmlFor="eventName">Name</label>
+                            <label htmlFor="newsTitle">Title</label>
                             <input
                                 type="text"
                                 required
                                 onChange={this.handleFieldChange}
-                                id="eventName"
-                                placeholder="Event name"
+                                id="newsTitle"
+                                placeholder="Title"
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="eventName">Location</label>
+                            <label htmlFor="newsUrl">Link to article</label>
                             <input
                                 type="text"
                                 required
                                 onChange={this.handleFieldChange}
-                                id="eventLocation"
-                                placeholder="Event location"
+                                id="newsURL"
+                                placeholder="https://www.yoururl.com"
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="eventName">Date</label>
-                            <input
-                                type="date"
+                            <label htmlFor="newsSynopsis">Synopsis</label>
+                            <textarea
                                 required
                                 onChange={this.handleFieldChange}
-                                id="eventDate"
-                                placeholder="Event Date"
+                                id="newsSynopsis"
+                                placeholder="Synopsis"
                             />
                         </div>
                         <div className="alignRight">
                             <button
                                 type="button"
                                 disabled={this.state.loadingStatus}
-                                onClick={this.constructNewEvent}
+                                onClick={this.constructNewArticle}
                             >Submit</button>
                         </div>
                     </fieldset>
