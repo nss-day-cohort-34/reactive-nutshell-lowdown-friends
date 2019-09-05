@@ -1,5 +1,5 @@
 // Author: Will Wilkinson
-// Purpose: Render an article tag containing EventsHeader and EventsList Componentimport React, { Component } from "react";
+// Purpose: Render an article tag containing EventsHeader and EventsList Component
 
 import React, { Component } from "react";
 import EventsHeader from "./EventsHeader"
