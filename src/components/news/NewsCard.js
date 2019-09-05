@@ -1,6 +1,7 @@
+// Author: Will Wilkinson
+// Purpose: Render a card to the DOM with news data from the API, and two buttons that allow you to edit or delete a news article
+
 import React, { Component } from 'react'
-
-
 
 export default class NewsCard extends Component {
     newsCardStyle = {

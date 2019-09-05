@@ -1,3 +1,6 @@
+// Author: Will Wilkinson
+// Purpose: Hold state, deleteNewsArticle and render NewsCard components with newsArticles' data from the API.
+
 import React, { Component } from "react"
 import NewsCard from './NewsCard'
 import NewsManager from '../../modules/NewsManager';

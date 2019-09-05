@@ -1,3 +1,6 @@
+// Author: Will Wilkinson
+// Purpose: Render an article tag containing NewsHeader and NewsList Component
+
 import React, { Component } from "react";
 import NewsHeader from "./NewsHeader"
 import NewsList from "./NewsList"

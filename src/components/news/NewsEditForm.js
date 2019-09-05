@@ -1,3 +1,6 @@
+// Author: Will Wilkinson
+// Purpose: Render a form that allows the user to edit an article, and handle the PUT functionality when they submit
+
 import React, { Component } from "react"
 import NewsManager from "../../modules/NewsManager"
 

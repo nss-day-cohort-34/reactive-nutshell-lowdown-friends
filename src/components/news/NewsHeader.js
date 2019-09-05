@@ -1,3 +1,6 @@
+// Author: Will Wilkinson
+// Purpose: Render header element containing and h1 and a button that routes the user to the Add News Article Page
+
 import React, { Component } from "react"
 
 

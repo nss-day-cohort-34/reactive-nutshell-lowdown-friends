@@ -1,3 +1,6 @@
+// Author: Will Wilkinson
+// Purpose: Handle all fetch calls to the news API
+
 const remoteURL = "http://localhost:5002"
 
 export default {
