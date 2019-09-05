@@ -1,3 +1,6 @@
+// AUTHOR: Sarah Fleming
+// Purpose: Render a single task with all required information
+
 import React, { Component } from 'react';
 import './TaskCard.css'
 

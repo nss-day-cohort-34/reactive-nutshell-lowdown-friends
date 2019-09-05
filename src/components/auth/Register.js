@@ -1,3 +1,6 @@
+// AUTHORS: Jacquelyn McCray and Sarah Fleming
+// Purpose: Render registration form that allows user to register an account. Runs checks to determine that the email address and username are unique, and then posts user to database. After post, it takes their userId and sets it in session storage.
+
 import React, { Component } from 'react';
 import UserData from '../../modules/UserManager'
 

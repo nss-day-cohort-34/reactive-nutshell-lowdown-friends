@@ -1,3 +1,6 @@
+// AUTHORS: Jacquelyn McCray and Sarah Fleming
+// Purpose: Render login form that allows existing users to access the app
+
 import React, { Component } from 'react';
 import UserData from '../../modules/UserManager'
 

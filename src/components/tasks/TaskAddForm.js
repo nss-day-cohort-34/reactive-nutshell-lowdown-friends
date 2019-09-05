@@ -1,3 +1,6 @@
+// AUTHOR: Sarah Fleming
+// Purpose: Allows a user to add a new task to their task list
+
 import React, { Component } from 'react';
 import TaskManager from '../../modules/TaskManager';
 
