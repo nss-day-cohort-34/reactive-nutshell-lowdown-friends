@@ -75,6 +75,8 @@ class Messages extends Component {
         <MessageList
           messages={this.state.messages}
           updateSingleCard={this.updateSingleCard}
+          friendData={this.props.friendData}
+          getAllFriendData={this.props.getAllFriendData}
         />
         <AddMessageForm
           message={this.state.message}

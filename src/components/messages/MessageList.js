@@ -18,6 +18,8 @@ class MessageList extends Component {
                 key={message.id}
                 messageObj={message}
                 updateSingleCard={this.props.updateSingleCard}
+                friendData={this.props.friendData}
+                getAllFriendData={this.props.getAllFriendData}
               />)
           }
         </div>

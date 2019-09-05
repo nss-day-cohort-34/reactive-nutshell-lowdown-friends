@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EditMessageForm from './MessageEditForm'
 import MessageManager from '../../modules/MessageManager'
+import FriendsManager from '../../modules/FriendsManager'
 
 import './MessageCard.css'
 
@@ -52,8 +53,27 @@ class MessageCard extends Component {
         this.setState({ editing: false })
         this.props.updateSingleCard(editedMessageObj)
       })
+  }
 
-
+  handleClickNameToAddFriendship = (event) => {
+    const activeUserId = parseInt(sessionStorage.getItem("activeUser"))
+    const otherUserId = parseInt(event.target.id.split("--")[1])
+    const friendsArr = this.props.friendData.friendsWithUserInfo.map(friend => friend.id)
+    if (!friendsArr.includes(otherUserId) && activeUserId !== otherUserId) {
+      const userConfirmation = window.confirm(`Do you want to add ${event.target.textContent} as a friend?`)
+      if (userConfirmation) {
+        const newFriendshipObj = {
+          userId: activeUserId,
+          otherUser: otherUserId,
+          isFriend: false
+        }
+        FriendsManager.addFriendshipRequest(newFriendshipObj)
+          .then(() => {
+            window.alert("Friend request sent!")
+            this.props.getAllFriendData()
+          })
+      }
+    }
   }
 
   // JSX for the message text and 'edit message' button. Receives the message text as an argument.
@@ -88,7 +108,11 @@ class MessageCard extends Component {
           :
           "nonActiveUserMessage__card message__card"
       }>
-        <h3>{this.props.messageObj.user.username}</h3>
+        <h3
+          onClick={this.handleClickNameToAddFriendship}
+          id={"message-username--" + this.props.messageObj.user.id}>
+          {this.props.messageObj.user.username}
+        </h3>
         <>
           {
             // Ternary expression determines whether message text or edit form will render

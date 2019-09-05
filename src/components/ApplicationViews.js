@@ -99,7 +99,10 @@ export default class ApplicationViews extends Component {
         <Route
           path="/messages" render={props => {
             return this.isAuthenticated()
-            ? <Messages />
+            ? <Messages
+            friendData={this.state}
+            getAllFriendData={this.getAllFriendData}
+            />
             : <Redirect to="/welcome" />
           }}
           />
