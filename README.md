@@ -30,15 +30,15 @@ npm install -g json-server
 ```
 cd api
 ```
-1. In the terminal, start your json-server on port 5002
+In the terminal, start your json-server on port 5002
 ```
 json-server -p 5002 -w database.json
 ```
-1. In another terminal tab/window type the command
+In another terminal tab/window type the command
 ```
 npm start
 ```
-1. Nutshell is now ready to use Nutshell!
+Nutshell is now ready to use!
 
 ## Sample Data (copy and paste into database.json file)
 ```json

@@ -1,5 +1,5 @@
 // AUTHOR: Sarah Fleming
-// The purpose of this module is to render the header with buttons for "Add Task" and "Show/Hide Completed Tasks"
+// Purpose: Render the header with buttons for "Add Task" and "Show/Hide Completed Tasks"
 
 import React, { Component } from 'react';
 
