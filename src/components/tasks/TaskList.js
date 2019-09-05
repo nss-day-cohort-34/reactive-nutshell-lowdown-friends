@@ -7,24 +7,31 @@ export default class TaskList extends Component {
 
     activeUserId = sessionStorage.getItem("activeUser")
 
+    getAllTasksAndSetState() {
+        TaskManager.getAllTasks(this.activeUserId)
+            .then((tasks) => {
+                this.props.stateHandler('tasks', tasks)
+            })
+    }
+
     componentDidMount() {
         TaskManager.getAllTasks(this.activeUserId)
             .then((tasks) => {
-                this.props.stateHandler('tasks',tasks)
+                this.props.stateHandler('tasks', tasks)
             })
     }
 
     deleteTask = id => {
         TaskManager.deleteTaskFromDatabase(id)
             .then(() => {
-                this.componentDidMount()
+                this.getAllTasksAndSetState()
             })
     }
 
     updateTask = taskObj => {
         TaskManager.saveEditedTaskToDatabase(taskObj)
             .then(() => {
-                this.componentDidMount()
+                this.getAllTasksAndSetState()
             })
     }
 
