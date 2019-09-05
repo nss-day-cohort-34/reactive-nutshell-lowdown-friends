@@ -8,7 +8,10 @@ export default class EventsSection extends Component {
         return (
             <article className="events__section">
                 <EventsHeader {...this.props} />
-                <EventsList {...this.props} />
+                <EventsList {...this.props}
+                    friendData={this.props.friendData}
+                    getAllFriendData={this.props.getAllFriendData}
+                />
             </article>
         )
     }

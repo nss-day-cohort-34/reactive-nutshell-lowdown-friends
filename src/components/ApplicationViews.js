@@ -12,8 +12,45 @@ import Messages from "./messages/MessageSection"
 import TaskSection from "./tasks/TaskSection";
 import TaskAddForm from "./tasks/TaskAddForm";
 import TaskEditForm from "./tasks/TaskEditForm";
+import UserManager from "../modules/UserManager";
+import FriendsManager from "../modules/FriendsManager";
 
 export default class ApplicationViews extends Component {
+  state = {
+    users: [],
+    friendships: [],
+    friendsWithUserInfo: []
+  }
+
+  getAllFriendData = () => {
+    const activeUserId = sessionStorage.getItem("activeUser")
+    UserManager.getAllExcludingActiveUser(activeUserId)
+      .then(users => { this.setState({ users: users }) })
+    return FriendsManager.getAllFriends("userId", activeUserId)
+      .then(friendships => {
+        FriendsManager.getAllFriends("otherUser", activeUserId)
+          .then(otherFriends => {
+            const allFriends = friendships.concat(otherFriends)
+            const currentFriendsArray = this.filterFriendsToDisplay(allFriends)
+            // Use allFriends array to set state for both 'friendships' and 'friendsWithUserInfo' so that 'friendsWithUserInfo' is not dependent on state of 'friendships'
+            this.setState({
+              friendships: allFriends,
+              friendsWithUserInfo: currentFriendsArray
+            })
+          })
+      })
+  }
+
+  filterFriendsToDisplay = (allFriends) => {
+    const currentFriendsArray = this.state.users.filter(user => {
+      return allFriends.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
+    })
+    return currentFriendsArray;
+  }
+
+  componentDidMount() {
+    this.getAllFriendData()
+  }
 
   isAuthenticated = () => sessionStorage.getItem("activeUser") !== null
 
@@ -39,31 +76,41 @@ export default class ApplicationViews extends Component {
         <Route
           exact path="/friends" render={props => {
             return this.isAuthenticated()
-            ? <FriendsSection {...props} />
-            : <Redirect to="/welcome" />
-          }}
-        />
-
-        <Route
-        path="/friends/new" render={props => {
-          return this.isAuthenticated()
-          ? <FriendsSearch {...props} />
-          : <Redirect to="/welcome" />
-        }}
-        />
-
-        <Route
-          path="/messages" render={props => {
-            return this.isAuthenticated()
-              ? <Messages />
+              ? <FriendsSection
+              {...props}
+              friendData={this.state}
+              getAllFriendData={this.getAllFriendData}
+              />
               : <Redirect to="/welcome" />
           }}
         />
 
+        <Route
+          path="/friends/new" render={props => {
+            return this.isAuthenticated()
+              ? <FriendsSearch {...props}
+              friendData={this.state}
+              getAllFriendData={this.getAllFriendData}
+              />
+              : <Redirect to="/welcome" />
+            }}
+            />
+
+        <Route
+          path="/messages" render={props => {
+            return this.isAuthenticated()
+            ? <Messages />
+            : <Redirect to="/welcome" />
+          }}
+          />
+
         {/* EVENTS ROUTES START */}
         <Route exact path="/events" render={props => {
           return this.isAuthenticated()
-            ? <EventsSection {...props} />
+          ? <EventsSection {...props}
+          friendData={this.state}
+          getAllFriendData={this.getAllFriendData}
+            />
             : <Redirect to="/welcome" />
         }}
         />

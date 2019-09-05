@@ -3,12 +3,15 @@ import FriendsHeader from './FriendsHeader';
 import FriendsList from './FriendsList';
 
 export default class FriendsSection extends Component {
-    render () {
-       return (
-           <section>
-               <FriendsHeader {...this.props}/>
-               <FriendsList />
-           </section>
-       )
+    render() {
+        return (
+            <section>
+                <FriendsHeader {...this.props} />
+                <FriendsList
+                    friendData={this.props.friendData}
+                    getAllFriendData={this.props.getAllFriendData}
+                />
+            </section>
+        )
     }
 }

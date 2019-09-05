@@ -1,69 +1,37 @@
 import React, { Component } from "react";
-import UserManager from "../../modules/UserManager";
 import FriendsManager from "../../modules/FriendsManager";
 import FriendsCard from './FriendsCard';
 
 export default class FriendsList extends Component {
-    state = {
-        users: [],
-        friendships: [],
-        friendsWithUserInfo: []
-    }
+    componentDidMount() {
+        this.props.getAllFriendData()
+      }
 
     deleteFriendship = friendshipId => {
         FriendsManager.deleteFriendShip(friendshipId)
         .then(() => {
-            this.getAllFriendData()
+            this.props.getAllFriendData()
         })
     }
     acceptFriendship = friendshipObj => {
         friendshipObj.isFriend = true
         FriendsManager.acceptFriendShip(friendshipObj)
         .then(() => {
-            this.getAllFriendData()
+            this.props.getAllFriendData()
         })
-    }
-
-    filterFriendsToDisplay = (allFriends) => {
-        const currentFriendsArray = this.state.users.filter(user => {
-            return allFriends.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
-        })
-        return currentFriendsArray;
-    }
-
-    getAllFriendData = () => {
-        const activeUserId = sessionStorage.getItem("activeUser")
-        UserManager.getAllExcludingActiveUser(activeUserId)
-            .then(users => { this.setState({ users: users }) })
-        return FriendsManager.getAllFriends("userId", activeUserId)
-            .then(friendships => {
-                FriendsManager.getAllFriends("otherUser", activeUserId)
-                    .then(otherFriends => {
-                        const allFriends = friendships.concat(otherFriends)
-                        // Use allFriends array to set state for both 'friendships' and 'friendsWithUserInfo' so that 'friendsWithUserInfo' is not dependent on state of 'friendships'
-                        this.setState({
-                            friendships: allFriends,
-                            friendsWithUserInfo: this.filterFriendsToDisplay(allFriends)
-                        })
-                    })
-            })
-    }
-
-    componentDidMount() {
-        this.getAllFriendData()
     }
 
     render() {
         return (
             <section className="friendsList__section">
                 {
-                    this.state.friendsWithUserInfo.map(user => {
+                    this.props.friendData.friendsWithUserInfo.map(user => {
                         return <FriendsCard
                             key={user.id}
                             user={user}
                             deleteFriendship={this.deleteFriendship}
                             acceptFriendship={this.acceptFriendship}
-                            friendship={this.state.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)}
+                            friendship={this.props.friendData.friendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)}
                             {...this.props} />
                     })
                 }

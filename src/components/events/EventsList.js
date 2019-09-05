@@ -25,7 +25,7 @@ export default class EventsList extends Component {
     }
 
     componentDidMount() {
-        this.getAllFriendDataAndSetState()
+        this.props.getAllFriendData()
             .then(() => {
                 this.getAllEvents()
                     .then(allEvents => {
@@ -56,7 +56,7 @@ export default class EventsList extends Component {
 
     // Get array of user objects that includes activeUser's friends only
     filterUsersArrToFriends = (allFriendships) => {
-        const currentFriendsArray = this.state.users.filter(user => {
+        const currentFriendsArray = this.props.friendData.users.filter(user => {
             return allFriendships.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
         })
         return currentFriendsArray;
@@ -67,7 +67,7 @@ export default class EventsList extends Component {
         const activeUser = sessionStorage.getItem("activeUser")
         return EventsManager.getAllEventsForActiveUser(activeUser)
             .then(events => {
-                const friendEventsArr = this.state.friendsWithUserInfo.map(friend => {
+                const friendEventsArr = this.props.friendData.friendsWithUserInfo.map(friend => {
                     return friend.events
                 }).flat(1)
                 const allEvents = events.concat(friendEventsArr)
