@@ -1,3 +1,6 @@
+// Author: Will Wilkinson
+// Purpose: Render a form that allows the user to add a new event to the API, and handle the POST functionality when they submit
+
 import React, { Component } from "react"
 import EventManager from '../../modules/EventManager';
 

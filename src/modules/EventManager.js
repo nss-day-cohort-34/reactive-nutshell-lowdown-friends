@@ -8,8 +8,12 @@ export default {
         return fetch(`${remoteURL}/events/${id}`)
             .then(result => result.json())
     },
-    getAll(activeUser) {
+    getAllEventsForActiveUser(activeUser) {
         return fetch(`${remoteURL}/events?_sort=date&_order=asc&userId=${activeUser}`)
+            .then(result => result.json())
+    },
+    getAll() {
+        return fetch(`${remoteURL}/events?_sort=date&_order=asc&_expand=user`)
             .then(result => result.json())
     },
     addEvent(event) {

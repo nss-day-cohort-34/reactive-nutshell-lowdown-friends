@@ -1,3 +1,6 @@
+// Author: Jacquelyn McCray
+// Purpose: Component displays message header, list, and input to post a new message. 
+
 import React, { Component } from 'react'
 import MessageHeader from './MessageHeader'
 import MessageList from './MessageList'
@@ -12,7 +15,6 @@ class Messages extends Component {
     messages: [],
     messageEdit: ""
   }
-
 
   componentDidMount() {
     this.getMessagesAndSetState()
@@ -75,6 +77,8 @@ class Messages extends Component {
         <MessageList
           messages={this.state.messages}
           updateSingleCard={this.updateSingleCard}
+          friendData={this.props.friendData}
+          getAllFriendData={this.props.getAllFriendData}
         />
         <AddMessageForm
           message={this.state.message}

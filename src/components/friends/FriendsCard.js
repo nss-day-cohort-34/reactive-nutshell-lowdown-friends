@@ -1,3 +1,6 @@
+// Author: Will Wilkinson, Sarah Fleming, Jacquelyn McCray
+// Purpose: Render a card to the DOM with friend data from the API, and a delete button that allows activeUser to remove the friend
+
 import React, { Component } from "react";
 
 export default class FriendsCard extends Component {
