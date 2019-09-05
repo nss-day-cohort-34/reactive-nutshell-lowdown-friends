@@ -1,3 +1,6 @@
+// AUTHOR: Sarah Fleming
+// The purpose of this module is to render the TaskHeader and TaskList modules
+
 import React, { Component } from 'react';
 import TaskHeader from "./TaskHeader";
 import TaskList from "./TaskList";

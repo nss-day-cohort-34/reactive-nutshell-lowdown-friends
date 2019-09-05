@@ -1,3 +1,6 @@
+// AUTHOR: Sarah Fleming
+// Purpose of the module is to display a user's list of tasks
+
 import React, { Component } from 'react';
 import TaskCard from './TaskCard';
 import TaskCompleted from './TaskCompleted';

@@ -1,3 +1,6 @@
+// AUTHOR: Sarah Fleming
+// The purpose of this module is to render the header with buttons for "Add Task" and "Show/Hide Completed Tasks"
+
 import React, { Component } from 'react';
 
 export default class TaskHeader extends Component {

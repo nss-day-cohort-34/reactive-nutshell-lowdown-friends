@@ -1,3 +1,6 @@
+// AUTHOR: Sarah Fleming
+// The purpose of this module is to render an edit form so that allows the user to edit the task's name
+
 import React, { Component } from 'react';
 import TaskManager from '../../modules/TaskManager';
 
