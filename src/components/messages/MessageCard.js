@@ -1,3 +1,6 @@
+// Author: Jacquelyn McCray
+// Purpose: Component displays a single message. Conditionally renders 'edit' button based on activeUser Id and the Id of the user who created the message.
+
 import React, { Component } from 'react';
 import EditMessageForm from './MessageEditForm'
 import MessageManager from '../../modules/MessageManager'

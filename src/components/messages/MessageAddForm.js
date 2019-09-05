@@ -1,3 +1,6 @@
+// Author: Jacquelyn McCray
+// Purpose: Component allows user to post a new message to the message list.
+
 import React, { Component } from 'react';
 import './MessageAddForm.css'
 
