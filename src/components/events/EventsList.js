@@ -34,7 +34,7 @@ export default class EventsList extends Component {
         const activeUser = sessionStorage.getItem("activeUser")
         return EventsManager.getAllEventsForActiveUser(activeUser)
             .then(events => {
-                const friendEventsArr = this.props.friendData.friendsWithUserInfo.map(friend => {
+                const friendEventsArr = this.props.friendData.acceptedFriends.map(friend => {
                     return friend.events
                 }).flat(1)
                 const allEvents = events.concat(friendEventsArr)

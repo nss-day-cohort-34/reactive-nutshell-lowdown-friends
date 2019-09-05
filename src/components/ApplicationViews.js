@@ -19,7 +19,8 @@ export default class ApplicationViews extends Component {
   state = {
     users: [],
     friendships: [],
-    friendsWithUserInfo: []
+    friendsWithUserInfo: [],
+    acceptedFriends: []
   }
 
   getAllFriendData = () => {
@@ -31,21 +32,30 @@ export default class ApplicationViews extends Component {
         FriendsManager.getAllFriends("otherUser", activeUserId)
           .then(otherFriends => {
             const allFriends = friendships.concat(otherFriends)
-            const currentFriendsArray = this.filterFriendsToDisplay(allFriends)
+            const pendingAndAcceptedFriends = this.filterFriendsToDisplay(allFriends)
+            const acceptedFriends = this.filterAcceptedFriends(allFriends)
             // Use allFriends array to set state for both 'friendships' and 'friendsWithUserInfo' so that 'friendsWithUserInfo' is not dependent on state of 'friendships'
             this.setState({
               friendships: allFriends,
-              friendsWithUserInfo: currentFriendsArray
+              friendsWithUserInfo: pendingAndAcceptedFriends,
+              acceptedFriends: acceptedFriends
             })
           })
       })
   }
 
   filterFriendsToDisplay = (allFriends) => {
-    const currentFriendsArray = this.state.users.filter(user => {
+    const pendingAndAcceptedFriends = this.state.users.filter(user => {
       return allFriends.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
     })
-    return currentFriendsArray;
+    return pendingAndAcceptedFriends;
+  }
+
+  filterAcceptedFriends = (allFriends) => {
+    const acceptedFriends = this.state.users.filter(user => {
+      return allFriends.find(friendship => (user.id === friendship.userId || user.id === friendship.otherUser) && friendship.isFriend)
+    })
+    return acceptedFriends;
   }
 
   componentDidMount() {
