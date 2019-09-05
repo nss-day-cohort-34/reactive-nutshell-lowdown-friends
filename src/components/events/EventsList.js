@@ -32,7 +32,6 @@ export default class EventsList extends Component {
                     futureEvents: futureEvents,
                     pastEvents: pastEvents
                 })
-                console.log(this.state)
             })
     }
 
