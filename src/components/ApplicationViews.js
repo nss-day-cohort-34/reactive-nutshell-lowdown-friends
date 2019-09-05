@@ -77,7 +77,10 @@ export default class ApplicationViews extends Component {
         <Route
           exact path="/" render={props => {
             return this.isAuthenticated()
-            ? <NewsSection {...props} />
+            ? <NewsSection {...props}
+            friendData={this.state}
+            getAllFriendData={this.getAllFriendData}
+            />
             : <Redirect to="/welcome" />
           }}
         />
@@ -86,7 +89,7 @@ export default class ApplicationViews extends Component {
             ? <NewsForm {...props} />
             : <Redirect to="/welcome" />
         }} />
-        
+
         <Route path="/:newsId(\d+)/edit" render={props => {
           return this.isAuthenticated()
             ? <NewsEditForm {...props} />
