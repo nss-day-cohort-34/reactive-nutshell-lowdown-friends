@@ -6,7 +6,11 @@ export default class EventCard extends Component {
     activeUser = parseInt(sessionStorage.getItem("activeUser"))
     render() {
         return (
-            <div className="eventCard__div col-sm-4 my-4">
+            <div className={`col-sm-4 my-4
+            ${this.activeUser !== this.props.event.userId
+            ? "friendsEventCard__div"
+            : "eventCard__div"}`
+            }>
                 <h4 className="eventName__h4"><span>{this.props.event.name}</span></h4>
                 <p className="eventDate__p">Date: <span>{(this.props.event.date)}</span></p>
                 <p className="eventLocation__p">Location: <span>{this.props.event.location}</span></p>
