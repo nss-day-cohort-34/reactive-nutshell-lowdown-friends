@@ -9,7 +9,7 @@ class MessageHeader extends Component {
   render() {
 
     return (
-      <div className="message__header">
+      <div className="message__header text-center my-4">
         <h1>Messages</h1>
       </div>
     )

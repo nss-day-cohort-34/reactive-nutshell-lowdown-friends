@@ -14,29 +14,33 @@ class NavBar extends Component {
 
     render() {
         return this.isAuthenticated()
-        ?(
-            <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
-                <ul className="nav nav-pills nav-fill">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/">News</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/events">Events</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/friends">Friends</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/messages">Messages</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/tasks">Tasks</Link>
-                    </li>
-                </ul>
-                <button onClick={this.logOut}>Log Out</button>
-            </nav>
-        )
-        :<nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
+            ? (
+                <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
+                    <ul className="nav nav-pills nav-fill">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/">News</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/events">Events</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/friends">Friends</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/messages">Messages</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/tasks">Tasks</Link>
+                        </li>
+                    </ul>
+                    <ul className="nav nav-pills nav-fill justify-content-end">
+                        <li className="nav-item">
+                            <Link to="#" className="nav-link " onClick={this.logOut}>Log Out</Link>
+                        </li>
+                    </ul>
+                </nav>
+            )
+            : <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
                 <ul className="nav nav-pills nav-fill">
                     <li className="nav-item">
                         <Link className="nav-link" to="/register">Register</Link>

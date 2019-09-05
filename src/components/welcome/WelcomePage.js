@@ -6,10 +6,10 @@ class WelcomePage extends Component {
   render() {
 
     return (
-      <div>
-        <h1>Welcome to Nutshell!</h1>
-        <p><Link className="welcome-link" to="/register">Click Here to Register</Link></p>
-        <p><Link className="welcome-link" to="/login">Existing Users Log In Here</Link></p>
+      <div className="jumbotron">
+        <h1 className="display-4">Welcome to Nutshell!</h1>
+        <p><Link className="welcome-link btn btn-primary my-3" to="/register">Click Here to Register</Link></p>
+        <p><Link className="welcome-link btn btn-primary my-3" to="/login">Existing Users Log In Here</Link></p>
       </div>
     )
   }
