@@ -1,3 +1,6 @@
+// Author: Will Wilkinson, Sarah Fleming, Jacquelyn McCray
+// Purpose: Component displays friends header and friends list.
+
 import React, { Component } from 'react';
 import FriendsHeader from './FriendsHeader';
 import FriendsList from './FriendsList';

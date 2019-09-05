@@ -1,6 +1,7 @@
+// Author: Will Wilkinson
+// Purpose: Render a card to the DOM with event data from the API, and two buttons that allow users to edit or delete a news article
+
 import React, { Component } from 'react'
-
-
 
 export default class EventCard extends Component {
     activeUser = parseInt(sessionStorage.getItem("activeUser"))

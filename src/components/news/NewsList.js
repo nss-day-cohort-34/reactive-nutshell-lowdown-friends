@@ -30,7 +30,6 @@ export default class NewsList extends Component {
         return (
             <>
                 <div className="newList__div container">
-                    <h2 className="text-center my-5">NewsList</h2>
                     <div className="row">
                         {this.state.newsArticles.map(newsArticle => {
                             return <NewsCard

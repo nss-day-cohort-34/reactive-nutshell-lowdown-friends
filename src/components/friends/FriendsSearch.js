@@ -1,3 +1,6 @@
+// Author: Will Wilkinson, Sarah Fleming, Jacquelyn McCray
+// Purpose: Allow users to search for potential friends and request to add them as friends
+
 import React, { Component } from "react";
 import FriendsManager from "../../modules/FriendsManager";
 import FriendsSearchCard from './FriendsSearchCard';
@@ -27,7 +30,7 @@ export default class FriendsSearch extends Component {
 
   handleChange = (event) => {
     const filteredPotentialFriends = this.state.potentialFriends.filter(user => {
-      return user.username.includes(event.target.value)
+      return user.username.toLowerCase().includes(event.target.value.toLowerCase())
     })
     this.setState({ friendSearchMatches: filteredPotentialFriends })
   }

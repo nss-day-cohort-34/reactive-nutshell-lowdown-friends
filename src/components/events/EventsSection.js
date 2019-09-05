@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+// Author: Will Wilkinson and Jacquelyn McCray
+// Purpose: Render an article tag containing EventsHeader and EventsList Componentimport React, { Component } from "react";
+
 import EventsHeader from "./EventsHeader"
 import EventsList from "./EventsList"
 import "./Events.css"

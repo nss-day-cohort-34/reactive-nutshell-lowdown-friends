@@ -1,3 +1,6 @@
+// Author: Will Wilkinson, Sarah Fleming, Jacquelyn McCray
+// Purpose: Get friend data and render FriendCard components with friends' data from the API. Send down deleteFriendship and acceptFriendship methods as props on the FriendCard component
+
 import React, { Component } from "react";
 import FriendsManager from "../../modules/FriendsManager";
 import FriendsCard from './FriendsCard';

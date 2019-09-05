@@ -1,3 +1,6 @@
+// Author: Will Wilkinson and Jacquelyn McCray
+// Purpose: Hold state, deleteEvent and render EventCard components with events' data from the API.
+
 import React, { Component } from "react"
 import EventCard from './EventCard'
 import EventsManager from '../../modules/EventManager';
@@ -66,7 +69,6 @@ export default class EventsList extends Component {
         return (
             <>
                 <div className="eventList__div container">
-                    <h2 className="text-center my-5">EventsList</h2>
                     <div className="row">
                         {this.state.futureEvents.map(event => {
                             return <EventCard
