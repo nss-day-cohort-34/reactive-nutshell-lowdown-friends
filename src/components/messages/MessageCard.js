@@ -55,11 +55,12 @@ class MessageCard extends Component {
       })
   }
 
+  // Handle instance when user clicks on username. If selected user is not already a friend, have user confirm they want to add the user as a friend
   handleClickNameToAddFriendship = (event) => {
     const activeUserId = parseInt(sessionStorage.getItem("activeUser"))
     const otherUserId = parseInt(event.target.id.split("--")[1])
-    const friendsArr = this.props.friendData.friendsWithUserInfo.map(friend => friend.id)
-    if (!friendsArr.includes(otherUserId) && activeUserId !== otherUserId) {
+    const friendIdsArr = this.props.friendData.friendsWithUserInfo.map(friend => friend.id)
+    if (!friendIdsArr.includes(otherUserId) && activeUserId !== otherUserId) {
       const userConfirmation = window.confirm(`Do you want to add ${event.target.textContent} as a friend?`)
       if (userConfirmation) {
         const newFriendshipObj = {

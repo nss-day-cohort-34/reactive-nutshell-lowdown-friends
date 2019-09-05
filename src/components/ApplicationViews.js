@@ -23,6 +23,7 @@ export default class ApplicationViews extends Component {
     acceptedFriends: []
   }
 
+  // Get users, frienships, and pending/accepted friends (as user objects) and set state with these arrays
   getAllFriendData = () => {
     const activeUserId = sessionStorage.getItem("activeUser")
     UserManager.getAllExcludingActiveUser(activeUserId)
@@ -44,6 +45,7 @@ export default class ApplicationViews extends Component {
       })
   }
 
+  // Filter friends to display on the friends list page. Includes pending and accepted friends
   filterFriendsToDisplay = (allFriends) => {
     const pendingAndAcceptedFriends = this.state.users.filter(user => {
       return allFriends.find(friendship => user.id === friendship.userId || user.id === friendship.otherUser)
@@ -51,6 +53,7 @@ export default class ApplicationViews extends Component {
     return pendingAndAcceptedFriends;
   }
 
+  // Filter down to accepted friends for displaying friends' news and events
   filterAcceptedFriends = (allFriends) => {
     const acceptedFriends = this.state.users.filter(user => {
       return allFriends.find(friendship => (user.id === friendship.userId || user.id === friendship.otherUser) && friendship.isFriend)
