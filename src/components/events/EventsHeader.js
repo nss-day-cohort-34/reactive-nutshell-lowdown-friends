@@ -14,9 +14,6 @@ export default class EventsHeader extends Component {
                 }} className="btn btn-primary">
                     Add Event
                 </button>
-                <button className="btn btn-primary">
-                    See Past Events
-                </button>
             </header>
         )
     }
