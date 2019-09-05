@@ -8,8 +8,12 @@ export default {
         return fetch(`${remoteURL}/news/${id}`)
             .then(result => result.json())
     },
-    getAll(activeUser) {
+    getAllNewsForActiveUser(activeUser) {
         return fetch(`${remoteURL}/news?_sort=date&_order=desc&userId=${activeUser}`)
+            .then(result => result.json())
+    },
+    getAll() {
+        return fetch(`${remoteURL}/news?_sort=date&_order=asc&_expand=user`)
             .then(result => result.json())
     },
     addNewsArticle(newsArticle) {
