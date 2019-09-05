@@ -52,7 +52,7 @@ export default class EventsForm extends Component {
                         <div className="form-group">
                             <label htmlFor="newsUrl">Link to article</label>
                             <input
-                                type="text"
+                                type="url"
                                 required
                                 onChange={this.handleFieldChange}
                                 id="newsURL"

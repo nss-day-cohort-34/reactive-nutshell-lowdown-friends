@@ -21,6 +21,7 @@ class EditEditForm extends Component {    //set the initial state
         const editedNewsArticle = {
             id: this.props.match.params.newsId,
             title: this.state.editTitle,
+            date: this.state.editDate,
             userId: parseInt(sessionStorage.getItem("activeUser")),
             url: this.state.editURL,
             synopsis: this.state.editSynopsis
@@ -46,9 +47,9 @@ class EditEditForm extends Component {    //set the initial state
     render() {
         return (
             <>
-                <form>
+                <form className="container">
                     <fieldset>
-                        <div className="formgrid">
+                        <div className="formgroup">
                             <label htmlFor="editTitle">Title</label>
                             <input
                                 type="text"
@@ -58,15 +59,19 @@ class EditEditForm extends Component {    //set the initial state
                                 id="editTitle"
                                 value={this.state.editTitle}
                             />
+                        </div>
+                        <div className="formgroup">
                             <label htmlFor="editURL">URL</label>
                             <input
-                                type="text"
+                                type="url"
                                 required
                                 className="form-control"
                                 onChange={this.handleFieldChange}
                                 id="editLocation"
                                 value={this.state.editURL}
                             />
+                        </div>
+                        <div className="formgroup">
                             <label htmlFor="editSynopsis">Synopsis</label>
                             <textarea
                                 required
@@ -76,13 +81,11 @@ class EditEditForm extends Component {    //set the initial state
                                 value={this.state.editSynopsis}
                             />
                         </div>
-                        <div className="alignRight">
-                            <button
-                                type="button" disabled={this.state.loadingStatus}
-                                onClick={this.updateExistingArticle}
-                                className="btn btn-primary"
-                            >Submit</button>
-                        </div>
+                        <button
+                            type="button" disabled={this.state.loadingStatus}
+                            onClick={this.updateExistingArticle}
+                            className="btn btn-primary"
+                        >Submit</button>
                     </fieldset>
                 </form>
             </>
