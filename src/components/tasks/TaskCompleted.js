@@ -1,3 +1,6 @@
+// AUTHOR: Sarah Fleming
+// Purpose: Render completed tasks
+
 import React, { Component } from 'react';
 import './TaskCompleted.css'
 
