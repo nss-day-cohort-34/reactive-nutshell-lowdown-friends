@@ -1,3 +1,6 @@
+// Author: Jacquelyn McCray
+// Purpose: Component displays all message cards in the order they were posted, with the default view showing the most recent message at the bottom of the list
+
 import React, { Component } from 'react'
 import MessageCard from './MessageCard'
 import './MessageList.css'
@@ -18,6 +21,8 @@ class MessageList extends Component {
                 key={message.id}
                 messageObj={message}
                 updateSingleCard={this.props.updateSingleCard}
+                friendData={this.props.friendData}
+                getAllFriendData={this.props.getAllFriendData}
               />)
           }
         </div>

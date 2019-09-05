@@ -1,7 +1,13 @@
-.eventCard__div:first-of-type {
+.eventCard__div:first-of-type,
+.friendsEventCard__div:first-of-type {
     background-color: #78a3b1;
     font-weight: 600;
     font-size: 140%;
+}
+
+.friendsEventCard__div {
+    background-color: cornsilk;
+    font-style: italic;
 }
 
 .eventCard__div {

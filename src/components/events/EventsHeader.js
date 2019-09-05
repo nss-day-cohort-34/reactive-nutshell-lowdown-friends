@@ -1,3 +1,6 @@
+// Author: Will Wilkinson
+// Purpose: Render header element containing an h1 and a button that routes the user to the Add Event Page
+
 import React, { Component } from "react"
 
 
@@ -10,9 +13,6 @@ export default class EventsHeader extends Component {
                     this.props.history.push("/events/new")
                 }} className="btn btn-primary">
                     Add Event
-                </button>
-                <button className="btn btn-primary">
-                    See Past Events
                 </button>
             </header>
         )

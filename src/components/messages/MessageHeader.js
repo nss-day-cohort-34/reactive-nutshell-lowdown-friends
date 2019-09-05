@@ -1,3 +1,6 @@
+// Author: Jacquelyn McCray
+// Purpose: Component includes message header.
+
 import React, { Component } from 'react'
 
 import './MessageHeader.css'

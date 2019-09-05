@@ -1,3 +1,6 @@
+// Author: Will Wilkinson, Sarah Fleming, Jacquelyn McCray
+// Purpose: Display results of FriendsSearch as cards with the user's username and a button to add as a friend
+
 import React, { Component } from "react";
 
 export default class FriendsSearchCard extends Component {
