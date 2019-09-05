@@ -100,13 +100,13 @@ class MessageCard extends Component {
   // Render an individual message card, based on conditions described below
   render() {
     return (
-      <div className={
-        // Ternary expression determines class to be added to card based on userId
-        this.activeUser === this.userIdInMessageObj
+      // Ternary expression determines class to be added to card based on userId
+      <div className={`message__card
+        ${this.activeUser === this.userIdInMessageObj
           ?
-          "activeUserMessage__card message__card"
+          "activeUserMessage__card"
           :
-          "nonActiveUserMessage__card message__card"
+          "nonActiveUserMessage__card"}`
       }>
         <h3
           onClick={this.handleClickNameToAddFriendship}
