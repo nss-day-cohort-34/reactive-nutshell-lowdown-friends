@@ -1,5 +1,5 @@
 // AUTHOR: Sarah Fleming
-// Purpose of module is to allow user to add a new task to their task list
+// Purpose: Allows a user to add a new task to their task list
 
 import React, { Component } from 'react';
 import TaskManager from '../../modules/TaskManager';

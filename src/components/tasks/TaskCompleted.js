@@ -1,5 +1,5 @@
 // AUTHOR: Sarah Fleming
-// The purpose of this module is to render completed tasks
+// Purpose: Render completed tasks
 
 import React, { Component } from 'react';
 import './TaskCompleted.css'

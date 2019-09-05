@@ -1,5 +1,5 @@
 // AUTHOR: Sarah Fleming
-// The purpose of this module is to render a single task with all required information
+// Purpose: Render a single task with all required information
 
 import React, { Component } from 'react';
 import './TaskCard.css'
