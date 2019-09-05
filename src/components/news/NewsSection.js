@@ -11,7 +11,10 @@ export default class NewsSection extends Component {
         return (
             <article className="news__section">
                 <NewsHeader {...this.props} />
-                <NewsList {...this.props} />
+                <NewsList {...this.props}
+                friendData={this.props.friendData}
+                getAllFriendData={this.props.getAllFriendData}
+                />
             </article>
         )
     }

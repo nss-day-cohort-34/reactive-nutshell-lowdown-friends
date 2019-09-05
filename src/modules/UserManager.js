@@ -14,7 +14,7 @@ const UserData = {
       .then(result => result.json())
   },
   getAllExcludingActiveUser(activeUserId) {
-    return fetch(`${remoteURL}/users?id_ne=${activeUserId}&_embed=events`)
+    return fetch(`${remoteURL}/users?id_ne=${activeUserId}&_embed=events&_embed=news`)
       .then(result => result.json())
   },
   post(user) {
