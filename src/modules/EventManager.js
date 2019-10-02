@@ -1,7 +1,7 @@
 // Author: Will Wilkinson
 // Purpose: Handle all fetch calls to the events API
 
-const remoteURL = "http://localhost:5002"
+const remoteURL = "https://protected-castle-32548.herokuapp.com"
 
 export default {
     getSingleEvent(id) {
