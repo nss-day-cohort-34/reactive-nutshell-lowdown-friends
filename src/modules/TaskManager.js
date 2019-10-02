@@ -1,4 +1,4 @@
-const remoteURL = "http://localhost:5002"
+const remoteURL = "https://protected-castle-32548.herokuapp.com"
 
 const TaskData = {
     getSingleTask(id) {
